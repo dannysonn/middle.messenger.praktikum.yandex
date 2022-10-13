@@ -1,0 +1,2 @@
+!function(r){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},e=document.getElementById("root"),o=Handlebars.compile(r);e.innerHTML=o({store:n})}('<main class="error">\n    <span class="error__number">{{store.errorCode}}</span>\n    <span class="error__comment">Not found...</span>\n    <a class="error__link">Back to chats</a>\n</main>',{errorCode:"404"});
+//# sourceMappingURL=error4.afdc5436.js.map
