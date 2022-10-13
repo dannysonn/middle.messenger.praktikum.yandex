@@ -42,9 +42,7 @@ export let registrationTmpl = `<main class="authorization__background">
                 </div>
             </form>
 
-            <a href="./src/pages/Chats/">
-                <button class="authorization__btn">Register</button>
-            </a>
+            {{> button text="Register"}}
 
             <div class="registration__link">
                 <a href="/">Sign in</a>
