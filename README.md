@@ -11,5 +11,6 @@ Deployed project [here](https://soft-torte-46ed76.netlify.app)
 ✅ Install dependencies: npm install \
 ✅ Start the project in dev mode: npm run dev \
 ✅ Build the project: npm run build \
-✅ Start the project in prod mode: npm run start
+✅ Start the project in prod mode: npm run start \
+✅ To compile SCSS into CSS: npm run sass \
 
