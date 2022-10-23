@@ -25,3 +25,4 @@ export let loginTmpl = `<main class="authorization__background">
         </div>
     </div>
 </main>`;
+
