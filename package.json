@@ -17,10 +17,21 @@
     "sass": "sass src/styles/sass/main.scss src/styles/css/style.css"
   },
   "devDependencies": {
-    "parcel": "2.7.0"
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
+    "@parcel/transformer-sass": "2.3.2",
+    "eslint-config-airbnb": "19.0.4",
+    "parcel": "2.2.1",
+    "postcss": "^8.4.7",
+    "postcss-import": "^14.0.2",
+    "postcss-url": "^10.1.3",
+    "stylelint": "14.5.1",
+    "ts-node": "10.5.0",
+    "typescript": "4.5.5"
   },
   "dependencies": {
     "express": "4.18.1",
-    "handlebars": "4.7.7"
+    "handlebars": "4.7.7",
+    "nanoid": "^4.0.0"
   }
 }

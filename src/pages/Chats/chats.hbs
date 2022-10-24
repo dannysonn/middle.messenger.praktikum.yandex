@@ -1,5 +1,4 @@
-// language=hbs
-export let chatsTmpl = `<aside class="chats-sidebar">
+<aside class="chats-sidebar">
     <nav class="chats-header">
         <a href="/profile" class="chats-header__profile-link">Profile link</a>
 
@@ -8,9 +7,43 @@ export let chatsTmpl = `<aside class="chats-sidebar">
         </form>
     </nav>
     <ul class="chats-list">
-        {{#each store.chats}}
-            {{> chat }}
-        {{/each}}
+        <li class="chat">
+            <div class="chat__item">
+                <img class="user-avatar" src="" alt="user-avatar">
+            </div>
+            <div class="chat__item">
+                <span class="user-name">John</span>
+                <br>
+                <div class="user-message">Lorem ipsum dolor.</div>
+            </div>
+            <div class="chat__item">
+                <div class="chat__info">
+                    <time class="chat__time">1:18</time>
+                    <div class="chat__messages-count">
+                        <span>5</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="chat">
+            <div class="chat__item">
+                <img class="user-avatar" src="" alt="user-avatar">
+            </div>
+            <div class="chat__item">
+                <span class="user-name">John</span>
+                <br>
+                <div class="user-message">Lorem ipsum dolor.</div>
+            </div>
+            <div class="chat__item">
+                <div class="chat__info">
+                    <time class="chat__time">1:18</time>
+                    <div class="chat__messages-count">
+                        <span>5</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+
     </ul>
 </aside>
 
@@ -103,4 +136,3 @@ export let chatsTmpl = `<aside class="chats-sidebar">
     </footer>
 
 </main>
-`
