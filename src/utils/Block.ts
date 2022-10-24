@@ -196,7 +196,7 @@ export default class Block {
     }
 
     compile(template: (context: any) => string, context: any) {
-        const fragment = document.createElement('template') as HTMLTemplateElement;
+        const fragment = this._createDocumentElement('template') as HTMLTemplateElement;
 
         Object.entries(this.children).forEach(([key, child]) => {
             if (Array.isArray(child)) {

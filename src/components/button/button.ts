@@ -5,7 +5,7 @@ interface ButtonProps {
     text: string,
 }
 
-class Button extends Block {
+export default class Button extends Block {
     constructor(props: ButtonProps) {
         super(props);
     }

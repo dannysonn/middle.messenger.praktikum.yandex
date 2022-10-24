@@ -1,7 +1,13 @@
-// // Components
-// import '../../components/button/button.hbs'
-// import '../../components/button/button.ts'
-//
-// // Scripts
-// import './login.hbs'
-// import './login'
+import Login from "./login";
+import {renderDom} from "../../utils/renderDom";
+import Button from "../../components/button/button";
+
+document.addEventListener('DOMContentLoaded', () => {
+    let loginPage = new Login({
+        button: new Button({
+            text: 'Login'
+        })
+    });
+
+    renderDom(loginPage);
+});

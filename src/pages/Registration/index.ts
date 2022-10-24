@@ -1,7 +1,8 @@
-// // Components
-// import '../../components/button/button.hbs'
-// import '../../components/button/button.ts'
-//
-// // Scripts
-// import './registration.hbs'
-// import './registration'
+import Registration from "./registration";
+import {renderDom} from "../../utils/renderDom";
+
+document.addEventListener('DOMContentLoaded', () => {
+   let registrationPage = new Registration({});
+
+   renderDom(registrationPage);
+});
