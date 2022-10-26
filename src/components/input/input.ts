@@ -1,14 +1,17 @@
-import template from './chats.hbs';
 import Block from '../../utils/Block';
+import template from './input.hbs';
 
-interface ChatsProps {
-  chats?: object[];
-  events?;
+interface InputProps {
+  id: string;
+  label: string;
+  type: string;
+  placeholder: string;
+  name: string;
 }
 
-export default class Chats extends Block {
+export default class Input extends Block {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(props: ChatsProps) {
+  constructor(props: InputProps) {
     super(props);
   }
 

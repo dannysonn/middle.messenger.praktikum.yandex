@@ -1,8 +1,8 @@
-import Profile from "./profile";
-import {renderDom} from "../../utils/renderDom";
+import Profile from './profile';
+import { renderDom } from '../../utils/renderDom';
 
 document.addEventListener('DOMContentLoaded', () => {
-   let profilePage = new Profile({});
+  const profilePage = new Profile({});
 
-   renderDom(profilePage);
+  renderDom(profilePage);
 });
