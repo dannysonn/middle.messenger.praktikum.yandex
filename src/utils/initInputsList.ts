@@ -1,6 +1,6 @@
 import {validate} from "./validate";
 
-export let initInputsListEvents = () => {
+export let initInputsListEvents = (): void => {
     let inputNodes = document.querySelectorAll('input');
 
     inputNodes.forEach(input => {

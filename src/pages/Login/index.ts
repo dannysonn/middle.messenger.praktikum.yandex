@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginPage = new Login({
     button: new Button({
       text: 'Login',
+      class: 'authorization__btn',
       events: {
         click: (e) => {
           validateForm();

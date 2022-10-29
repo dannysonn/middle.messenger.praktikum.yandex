@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const registrationPage = new Registration({
     button: new Button({
       text: 'Register',
+      class: 'authorization__btn',
       events: {
         click: (e) => {
           validateForm();

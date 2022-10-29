@@ -3,7 +3,8 @@ import Block from '../../utils/Block';
 
 interface ButtonProps {
   text: string,
-  events?;
+  class: string,
+  events?,
 }
 
 export default class Button extends Block {

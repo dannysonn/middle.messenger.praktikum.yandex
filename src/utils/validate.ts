@@ -10,7 +10,7 @@ enum ValidationType {
     MESSAGE = 'message'
 }
 
-export const validate = (inputValue: string, type, inputId) => {
+export const validate = (inputValue: string, type: string, inputId: string) => {
     let isValid: boolean = false;
     let input = document.getElementById(inputId);
 
@@ -50,6 +50,12 @@ export const validate = (inputValue: string, type, inputId) => {
                 break;
             }
             isValid = /^(?=.*[a-zA-Z\d])/.test(inputValue);
+            break;
+
+        case ValidationType.MESSAGE:
+            if (inputValue.length > 0) {
+                isValid = true;
+            }
             break;
 
         default:

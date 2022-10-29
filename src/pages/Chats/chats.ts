@@ -1,8 +1,10 @@
 import template from './chats.hbs';
 import Block from '../../utils/Block';
 import Chat from '../../components/chat/chat';
+import Button from "../../components/button/button";
 
 interface ChatsProps {
+  button: Button;
   chats: any;
   events?;
 }
