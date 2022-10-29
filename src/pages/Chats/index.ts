@@ -29,6 +29,7 @@ const chats = [
 document.addEventListener('DOMContentLoaded', () => {
   const chatsPage = new Chats({
     chats: chats.map((chat: any) => chat),
+
   });
 
   renderDom(chatsPage);
