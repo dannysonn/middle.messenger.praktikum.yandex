@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'second_name',
     }),
     phoneInput: new Input({
-      id: 'authForm__email',
-      label: 'Email',
-      type: 'email',
-      placeholder: 'programmer2000@google.com',
-      name: 'email',
+      id: 'authForm__phone',
+      label: 'Phone',
+      type: 'tel',
+      placeholder: '999-99-999',
+      name: 'phone',
     }),
     passwordInput: new Input({
       id: 'authForm__password',
