@@ -1,2 +1,0 @@
-!function(r){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},e=document.getElementById("root"),a=Handlebars.compile(r);e.innerHTML=a({store:n})}('<main class="error">\n    <span class="error__number">{{store.errorCode}}</span>\n    <span class="error__comment">Already fixing...</span>\n    <a class="error__link">Back to chats</a>\n</main>',{errorCode:"500"});
-//# sourceMappingURL=error5.854b1490.js.map
