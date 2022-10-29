@@ -1,77 +1,67 @@
 .profile {
-  &__wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		width: 50vw;
+		margin: 0 auto;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 
-    width: 50vw;
-    margin: 0 auto;
+		&__item-data {
+			color: #999;
+		}
+	}
 
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	&__item {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		border-bottom: 1px solid #eaeaea;
+		padding-bottom: 10px;
+		margin-bottom: 10px;
 
-    &__item-data {
-      color: #999999;
-    }
-  }
+		&:last-child {
+			border: none;
+		}
+	}
 
-  &__item {
-    display: flex;
-    justify-content: space-between;
+	&__header {
+		text-align: center;
+		margin-bottom: 60px;
+	}
 
-    width: 100%;
+	&__avatar {
+		border-radius: 50%;
+		margin-bottom: 21px;
+	}
 
-    border-bottom: 1px solid #EAEAEA;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+	&__content {
+		width: 100%;
+		margin-bottom: 60px;
+	}
 
-    &:last-child {
-      border: none;
-    }
-  }
+	&__footer {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
 
-  &__header {
-    text-align: center;
-    margin-bottom: 60px;
-  }
+		&-item {
+			width: 25%;
+			border: none;
+			background: none;
+			text-align: left;
+			font-size: 16px;
+			color: #3369f3;
+			cursor: pointer;
+			margin-bottom: 20px;
 
-  &__avatar {
-    border-radius: 50%;
-    margin-bottom: 21px;
-  }
-
-  &__content {
-    width: 100%;
-
-    margin-bottom: 60px;
-  }
-
-  &__footer {
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    &-item {
-      width: 25%;
-
-      border: none;
-      background: none;
-      text-align: left;
-
-      font-size: 16px;
-      color: #3369F3;
-
-      cursor: pointer;
-
-      margin-bottom: 20px;
-
-      &--logout {
-        color: #FF0000;
-      }
-    }
-  }
+			&--logout {
+				color: #f00;
+			}
+		}
+	}
 }
