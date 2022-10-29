@@ -32,6 +32,7 @@ export default class Block {
     };
 
     this.props = this._makePropsProxy(props);
+    this.children = this._makePropsProxy(children);
 
     this.initChild();
 
@@ -49,7 +50,7 @@ export default class Block {
       Object.entries(propsAndChildren).forEach(([key, value]) => {
         if (value instanceof Block) {
           children[key] = value;
-        } else if (Array.isArray(value) && value.every((v) => v instanceof Block)) {
+        } else if (Array.isArray(value) && value.every((val) => val instanceof Block)) {
           children[key] = value;
         } else {
           props[key] = value;

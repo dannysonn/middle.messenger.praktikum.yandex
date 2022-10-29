@@ -12,30 +12,24 @@ const chats = [
   }),
   new Chat({
     userAvatar: '',
-    userName: 'John',
-    message: 'lorem ipsum.',
+    userName: 'Danila',
+    message: 'Ya ochen',
     time: '10:30',
-    messagesCount: '5',
+    messagesCount: '3',
   }),
   new Chat({
     userAvatar: '',
-    userName: 'John',
-    message: 'lorem ipsum.',
+    userName: 'Irina',
+    message: 'Ystaaaaal.',
     time: '10:30',
-    messagesCount: '5',
+    messagesCount: '4',
   }),
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-  const chatsPage = new Chats({});
+  const chatsPage = new Chats({
+    chats: chats.map((chat: any) => chat),
+  });
 
   renderDom(chatsPage);
-
-  const chatList: Element | null = document.querySelector('.chats-list');
-
-  chats.forEach((chat) => {
-    if (chatList !== null) {
-      chatList.append(chat.getContent());
-    }
-  });
 });
