@@ -4,6 +4,7 @@ import Button from '../../components/button/button';
 import Input from '../../components/input/input';
 import {initInputsListEvents} from "../../utils/initInputsList";
 import {validateForm} from "../../utils/validateForm";
+import {Form} from "../../components/form/form";
 
 let inputs = [
   new Input({
@@ -73,16 +74,21 @@ let inputs = [
 
 document.addEventListener('DOMContentLoaded', () => {
   const registrationPage = new Registration({
-    button: new Button({
-      text: 'Register',
-      class: 'authorization__btn',
+    form: new Form({
+      formId: 'authForm',
+      inputs: inputs.map((input: any) => input),
       events: {
-        click: (e) => {
+        submit: (e) => {
+          e.preventDefault();
           validateForm();
         }
       }
     }),
-    inputs: inputs.map((input: any) => input),
+    button: new Button({
+      text: 'Register',
+      class: 'authorization__btn',
+      formId: 'authForm',
+    }),
   });
 
   renderDom(registrationPage);

@@ -5,10 +5,11 @@ import Input from '../../components/input/input';
 import {validate} from "../../utils/validate";
 import {initInputsListEvents} from "../../utils/initInputsList";
 import {validateForm} from "../../utils/validateForm";
+import {Form} from "../../components/form/form";
 
 const inputs = [
   new Input({
-    class: 'authForm__item',
+    wrapperClass: 'authForm__item',
     id: 'authForm__login',
     label: 'Login',
     type: 'login',
@@ -17,7 +18,7 @@ const inputs = [
     hasLineBreak: true,
   }),
   new Input({
-    class: 'authForm__item',
+    wrapperClass: 'authForm__item',
     id: 'authForm__password',
     label: 'Password',
     type: 'password',
@@ -29,16 +30,21 @@ const inputs = [
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginPage = new Login({
-    button: new Button({
-      text: 'Login',
-      class: 'authorization__btn',
+    form: new Form({
+      formId: 'authForm',
+      inputs: inputs.map((input: any) => input),
       events: {
-        click: (e) => {
+        submit: (e) => {
+          e.preventDefault();
           validateForm();
         }
       }
     }),
-    inputs: inputs.map((input: any) => input),
+    button: new Button({
+      text: 'Login',
+      class: 'authorization__btn',
+      formId: 'authForm',
+    }),
   });
 
   renderDom(loginPage);

@@ -4,6 +4,7 @@ import Button from "../../components/button/button";
 import Input from "../../components/input/input";
 import {initInputsListEvents} from "../../utils/initInputsList";
 import {validateForm} from "../../utils/validateForm";
+import {Form} from "../../components/form/form";
 
 let profileButtons = [
   new Button({
@@ -36,12 +37,7 @@ let changeDataButtons = [
   new Button({
     class: 'profile__footer-item',
     text: 'Save data',
-    events: {
-      click: (e) => {
-        validateForm();
-        renderDom(profilePage);
-      }
-    }
+    formId: 'profileForm',
   }),
 ]
 
@@ -49,12 +45,7 @@ let changePasswordButtons = [
   new Button({
     class: 'profile__footer-item',
     text: 'Save password',
-    events: {
-      click: (e) => {
-        validateForm();
-        renderDom(profilePage);
-      }
-    }
+    formId: 'profileForm',
   }),
 ]
 
@@ -207,17 +198,43 @@ let profileChangePasswordInputs = [
 
 
 const profilePage = new Profile({
-  inputs: profileInputs.map((input: Input) => input),
+  form: new Form({
+    formId: 'profileForm',
+    inputs: profileInputs.map((input: Input) => input),
+  }),
+
   buttons: profileButtons.map((button: Button) => button)
 });
 
 const profileChangeData = new Profile({
-  inputs: profileInputsChangeData.map((input: Input) => input),
+  form: new Form({
+    formId: 'profileForm',
+    events: {
+      submit: (e) => {
+        e.preventDefault();
+        validateForm();
+        renderDom(profilePage);
+      }
+    },
+    inputs: profileInputsChangeData.map((input: Input) => input),
+  }),
+
   buttons: changeDataButtons.map((button: Button) => button)
 });
 
 const profileChangePassword = new Profile({
-  inputs: profileChangePasswordInputs.map((input: Input) => input),
+  form: new Form({
+    formId: 'profileForm',
+    inputs: profileChangePasswordInputs.map((input: Input) => input),
+    events: {
+      submit: (e) => {
+        e.preventDefault();
+        validateForm();
+        renderDom(profilePage);
+      }
+    }
+  }),
+
   buttons: changePasswordButtons.map((button: Button) => button)
 });
 

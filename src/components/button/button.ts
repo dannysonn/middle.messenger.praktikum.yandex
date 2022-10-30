@@ -4,6 +4,7 @@ import Block from '../../utils/Block';
 interface ButtonProps {
   text: string,
   class: string,
+  formId?: string,
   events?,
 }
 
