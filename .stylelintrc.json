@@ -3,7 +3,4 @@
   "rules": {
     "color-hex-case": "lower"
   },
-  "ignoreFiles": [
-    "dist/*"
-  ]
 }
