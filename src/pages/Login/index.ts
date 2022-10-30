@@ -8,18 +8,22 @@ import {validateForm} from "../../utils/validateForm";
 
 const inputs = [
   new Input({
+    class: 'authForm__item',
     id: 'authForm__login',
     label: 'Login',
     type: 'login',
     placeholder: 'programmer2000',
     name: 'login',
+    hasLineBreak: true,
   }),
   new Input({
+    class: 'authForm__item',
     id: 'authForm__password',
     label: 'Password',
     type: 'password',
     placeholder: '**********',
     name: 'password',
+    hasLineBreak: true,
   })
 ]
 

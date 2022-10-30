@@ -17,7 +17,7 @@ export const validate = (inputValue: string, type: string, inputId: string) => {
     if (input === null) {
         throw new Error('Input not exists')
     }
-    console.log(ValidationType.LOGIN);
+
     switch (type) {
         case ValidationType.EMAIL:
             isValid = /^[A-Za-z\d_-]+@[A-Za-z].[A-Za-z]/.test(inputValue);

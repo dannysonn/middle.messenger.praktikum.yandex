@@ -318,6 +318,22 @@
 .profile__wrapper__item-data {
   color: #999;
 }
+.profile__sidebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5vw;
+  height: 100vh;
+  background-color: #FBFBFB;
+}
+.profile__btn {
+  width: 28px;
+  height: 28px;
+  background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='14' cy='14' r='14' transform='rotate(-180 14 14)' fill='%233369F3'/%3E%3Crect x='20' y='14.8' width='11' height='1.6' transform='rotate(-180 20 14.8)' fill='white'/%3E%3Cpath d='M13 19L9 14L13 9' stroke='white' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+}
 .profile__item {
   display: flex;
   justify-content: space-between;
@@ -328,6 +344,11 @@
 }
 .profile__item:last-child {
   border: none;
+}
+.profile__item input {
+  border: none;
+  outline: none;
+  text-align: right;
 }
 .profile__header {
   text-align: center;
