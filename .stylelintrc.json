@@ -4,6 +4,6 @@
     "color-hex-case": "lower"
   },
   "ignoreFiles": [
-    "dist"
+    "./dist"
   ]
 }
