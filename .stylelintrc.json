@@ -1,7 +1,4 @@
 {
-  "plugins": [
-    "stylelint-less"
-  ],
   "extends": "stylelint-config-standard",
   "rules": {
     "color-hex-case": "lower"
