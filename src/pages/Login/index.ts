@@ -2,7 +2,6 @@ import Login from './login';
 import { renderDom } from '../../utils/renderDom';
 import Button from '../../components/button/button';
 import Input from '../../components/input/input';
-import {validate} from "../../utils/validate";
 import {initInputsListEvents} from "../../utils/initInputsList";
 import {validateForm} from "../../utils/validateForm";
 import {Form} from "../../components/form/form";
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formId: 'authForm',
       inputs: inputs.map((input: any) => input),
       events: {
-        submit: (e) => {
+        submit: (e: Event) => {
           e.preventDefault();
           validateForm();
         }

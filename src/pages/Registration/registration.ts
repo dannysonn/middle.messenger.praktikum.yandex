@@ -1,7 +1,6 @@
 import Button from '../../components/button/button';
 import Block from '../../utils/Block';
 import template from './registration.hbs';
-import Input from "../../components/input/input";
 import {Form} from "../../components/form/form";
 
 interface RegistrationProps {

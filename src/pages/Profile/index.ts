@@ -11,7 +11,7 @@ let profileButtons = [
     class: 'profile__footer-item',
     text: 'Change data',
     events: {
-      click: (e) => {
+      click: () => {
         renderDom(profileChangeData);
         initInputsListEvents();
       }
@@ -21,7 +21,7 @@ let profileButtons = [
     class: 'profile__footer-item',
     text: 'Change password',
     events: {
-      click: (e) => {
+      click: () => {
         renderDom(profileChangePassword);
         initInputsListEvents();
       }
@@ -210,7 +210,7 @@ const profileChangeData = new Profile({
   form: new Form({
     formId: 'profileForm',
     events: {
-      submit: (e) => {
+      submit: (e: Event) => {
         e.preventDefault();
         validateForm();
         renderDom(profilePage);
@@ -227,7 +227,7 @@ const profileChangePassword = new Profile({
     formId: 'profileForm',
     inputs: profileChangePasswordInputs.map((input: Input) => input),
     events: {
-      submit: (e) => {
+      submit: (e: Event) => {
         e.preventDefault();
         validateForm();
         renderDom(profilePage);

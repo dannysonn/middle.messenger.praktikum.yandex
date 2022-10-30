@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formId: 'authForm',
       inputs: inputs.map((input: any) => input),
       events: {
-        submit: (e) => {
+        submit: (e: Event) => {
           e.preventDefault();
           validateForm();
         }

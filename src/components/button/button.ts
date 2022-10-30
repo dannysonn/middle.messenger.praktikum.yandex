@@ -5,7 +5,7 @@ interface ButtonProps {
   text: string,
   class: string,
   formId?: string,
-  events?,
+  events?: any,
 }
 
 export default class Button extends Block {

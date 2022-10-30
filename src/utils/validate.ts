@@ -1,5 +1,3 @@
-import Input from "../components/input/input";
-
 enum ValidationType {
     EMAIL = 'email',
     LOGIN = 'login',
