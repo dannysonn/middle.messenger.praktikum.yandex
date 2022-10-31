@@ -11,7 +11,7 @@ export default class Block {
 
   private _element: HTMLElement;
 
-  private readonly _meta: { props: any };
+  protected _meta: { props: any };
 
   protected props: any;
 
@@ -96,11 +96,12 @@ export default class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps, newProps?) {
+  componentDidUpdate(oldProps: any, newProps?: any) {
+    console.log(JSON.stringify(oldProps) === JSON.stringify(newProps))
     return true;
   }
 
-  setProps = (nextProps) => {
+  setProps = (nextProps: any) => {
     if (!nextProps) {
       return;
     }
@@ -136,7 +137,7 @@ export default class Block {
     return this.element;
   }
 
-  private _makePropsProxy(props) {
+  private _makePropsProxy(props: any) {
     // Можно и так передать this
     // Такой способ больше не применяется с приходом ES6+
     const self = this;
@@ -155,13 +156,13 @@ export default class Block {
         return true;
       },
 
-      deleteProperty(target, prop) {
+      deleteProperty() {
         throw new Error('нет доступа');
       },
     });
   }
 
-  private _createDocumentElement(tagName) {
+  private _createDocumentElement(tagName: any) {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
   }
@@ -174,7 +175,7 @@ export default class Block {
     this.getContent().style.display = 'none';
   }
 
-  _addEvents() {
+  private _addEvents() {
     const { events } = this.props;
 
     if (!events) {
@@ -186,7 +187,7 @@ export default class Block {
     });
   }
 
-  _removeEvents() {
+  private _removeEvents() {
     const { events } = this.props;
 
     if (!events || !this._element) {

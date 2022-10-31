@@ -2,11 +2,16 @@ import Block from '../../utils/Block';
 import template from './input.hbs';
 
 interface InputProps {
-  id: string;
+  wrapperClass?: string;
+  labelClass?: string;
+  inputClass? :string;
+  id?: string;
   label: string;
   type: string;
   placeholder: string;
   name: string;
+  hasLineBreak: boolean;
+  readonly?: boolean;
 }
 
 export default class Input extends Block {

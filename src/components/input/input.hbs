@@ -1,5 +1,7 @@
-<div class="authForm__item">
-    <label for="{{{id}}}">{{{label}}}</label>
-    <br>
-    <input type="{{{type}}}" id="{{{id}}}" placeholder="{{{placeholder}}}" name="{{{name}}}">
+<div class="{{{wrapperClass}}}">
+    <label class="{{{labelClass}}}" for="{{{id}}}">{{{label}}}</label>
+    {{#if hasLineBreak}}
+        <br>
+    {{/if}}
+    <input class="{{{inputClass}}}" type="{{{type}}}" id="{{{id}}}" placeholder="{{{placeholder}}}" name="{{{name}}}" {{#if readonly}}readonly='readonly'{{/if}}>
 </div>

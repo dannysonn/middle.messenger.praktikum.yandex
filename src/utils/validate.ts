@@ -1,5 +1,3 @@
-import Input from "../components/input/input";
-
 enum ValidationType {
     EMAIL = 'email',
     LOGIN = 'login',
@@ -10,14 +8,14 @@ enum ValidationType {
     MESSAGE = 'message'
 }
 
-export const validate = (inputValue: string, type, inputId) => {
+export const validate = (inputValue: string, type: string, inputId: string) => {
     let isValid: boolean = false;
     let input = document.getElementById(inputId);
 
     if (input === null) {
         throw new Error('Input not exists')
     }
-    console.log(ValidationType.LOGIN);
+
     switch (type) {
         case ValidationType.EMAIL:
             isValid = /^[A-Za-z\d_-]+@[A-Za-z].[A-Za-z]/.test(inputValue);
@@ -50,6 +48,12 @@ export const validate = (inputValue: string, type, inputId) => {
                 break;
             }
             isValid = /^(?=.*[a-zA-Z\d])/.test(inputValue);
+            break;
+
+        case ValidationType.MESSAGE:
+            if (inputValue.length > 0) {
+                isValid = true;
+            }
             break;
 
         default:
