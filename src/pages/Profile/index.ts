@@ -1,12 +1,12 @@
 import Profile from './profile';
 import { renderDom } from '../../utils/renderDom';
-import Button from "../../components/button/button";
-import Input from "../../components/input/input";
-import {initInputsListEvents} from "../../utils/initInputsList";
-import {validateForm} from "../../utils/validateForm";
-import {Form} from "../../components/form/form";
+import Button from '../../components/button/button';
+import Input from '../../components/input/input';
+import { initInputsListEvents } from '../../utils/initInputsList';
+import { validateForm } from '../../utils/validateForm';
+import Form from '../../components/form/form';
 
-let profileButtons = [
+const profileButtons = [
   new Button({
     class: 'profile__footer-item',
     text: 'Change data',
@@ -14,8 +14,8 @@ let profileButtons = [
       click: () => {
         renderDom(profileChangeData);
         initInputsListEvents();
-      }
-    }
+      },
+    },
   }),
   new Button({
     class: 'profile__footer-item',
@@ -24,32 +24,32 @@ let profileButtons = [
       click: () => {
         renderDom(profileChangePassword);
         initInputsListEvents();
-      }
-    }
+      },
+    },
   }),
   new Button({
     class: 'profile__footer-item profile__footer-item--logout',
     text: 'Logout',
   }),
-]
+];
 
-let changeDataButtons = [
+const changeDataButtons = [
   new Button({
     class: 'profile__footer-item',
     text: 'Save data',
     formId: 'profileForm',
   }),
-]
+];
 
-let changePasswordButtons = [
+const changePasswordButtons = [
   new Button({
     class: 'profile__footer-item',
     text: 'Save password',
     formId: 'profileForm',
   }),
-]
+];
 
-let profileInputs = [
+const profileInputs = [
   new Input({
     wrapperClass: 'profile__item',
     labelClass: 'content__item-label',
@@ -110,9 +110,9 @@ let profileInputs = [
     hasLineBreak: false,
     readonly: true,
   }),
-]
+];
 
-let profileInputsChangeData = [
+const profileInputsChangeData = [
   new Input({
     wrapperClass: 'profile__item',
     labelClass: 'content__item-label',
@@ -168,9 +168,9 @@ let profileInputsChangeData = [
     name: 'phone',
     hasLineBreak: false,
   }),
-]
+];
 
-let profileChangePasswordInputs = [
+const profileChangePasswordInputs = [
   new Input({
     wrapperClass: 'profile__item',
     labelClass: 'content__item-label',
@@ -193,9 +193,7 @@ let profileChangePasswordInputs = [
     name: 'second_password',
     hasLineBreak: false,
   }),
-]
-
-
+];
 
 const profilePage = new Profile({
   form: new Form({
@@ -203,7 +201,7 @@ const profilePage = new Profile({
     inputs: profileInputs.map((input: Input) => input),
   }),
 
-  buttons: profileButtons.map((button: Button) => button)
+  buttons: profileButtons.map((button: Button) => button),
 });
 
 const profileChangeData = new Profile({
@@ -214,12 +212,12 @@ const profileChangeData = new Profile({
         e.preventDefault();
         validateForm();
         renderDom(profilePage);
-      }
+      },
     },
     inputs: profileInputsChangeData.map((input: Input) => input),
   }),
 
-  buttons: changeDataButtons.map((button: Button) => button)
+  buttons: changeDataButtons.map((button: Button) => button),
 });
 
 const profileChangePassword = new Profile({
@@ -231,11 +229,11 @@ const profileChangePassword = new Profile({
         e.preventDefault();
         validateForm();
         renderDom(profilePage);
-      }
-    }
+      },
+    },
   }),
 
-  buttons: changePasswordButtons.map((button: Button) => button)
+  buttons: changePasswordButtons.map((button: Button) => button),
 });
 
 document.addEventListener('DOMContentLoaded', () => {

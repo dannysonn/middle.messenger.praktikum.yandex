@@ -1,40 +1,29 @@
-enum METHODS {
+import { queryStringify } from './queryStringify';
+
+enum Methods {
   GET = 'GET',
   PUT = 'PUT',
   POST = 'POST',
   DELETE = 'DELETE',
 }
 
-/**
- * Функцию реализовывать здесь необязательно, но может помочь не плодить логику у GET-метода
- * На входе: объект. Пример: {a: 1, b: 2, c: {d: 123}, k: [1, 2, 3]}
- * На выходе: строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
- */
-function queryStringify(data: any) {
-  // Можно делать трансформацию GET-параметров в отдельной функции
-  return `?${Object.keys(data).map((key) => `${key}=${data[key]}`).join('&')}`;
-}
+type Options = { method: string, data: any, headers: Record<string, string> };
 
 class HTTPTransport {
-  get = (url: string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  get = (url: string, options: Options) => this.request(url, { ...options, method: Methods.GET });
 
-  put = (url: string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  put = (url: string, options: Options) => this.request(url, { ...options, method: Methods.PUT });
 
-  post = (url: string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  post = (url: string, options: Options) => this.request(url, { ...options, method: Methods.POST });
 
-  delete = (url: string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  delete = (url: string, options: Options) => this.request(url, { ...options, method: Methods.DELETE });
 
-  // PUT, POST, DELETE
-
-  // options:
-  // headers — obj
-  // data — obj
-  request = (url: string, options: any, timeout = 5000) => {
-    const { method, data, headers } : { method: string, data: any, headers: Record<string, string> } = options;
+  request = (url: string, options: Options, timeout = 5000) => {
+    const { method, data, headers } : Options = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      const newUrl = (method === METHODS.GET && data) ? `${url}${queryStringify(data)}` : url;
+      const newUrl = (method === Methods.GET && data) ? `${url}${queryStringify(data)}` : url;
 
       xhr.open(method, newUrl, true);
 
@@ -52,7 +41,7 @@ class HTTPTransport {
       xhr.onerror = reject;
       xhr.ontimeout = reject;
 
-      if (method === METHODS.GET || !data) {
+      if (method === Methods.GET || !data) {
         xhr.send();
       } else {
         xhr.send(JSON.stringify(data));

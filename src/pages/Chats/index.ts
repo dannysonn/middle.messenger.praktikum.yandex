@@ -1,9 +1,9 @@
 import Chats from './chats';
 import { renderDom } from '../../utils/renderDom';
 import Chat from '../../components/chat/chat';
-import Button from "../../components/button/button";
-import {validateForm} from "../../utils/validateForm";
-import {initInputsListEvents} from "../../utils/initInputsList";
+import Button from '../../components/button/button';
+import { validateForm } from '../../utils/validateForm';
+import { initInputsListEvents } from '../../utils/initInputsList';
 
 const chats = [
   new Chat({
@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
       text: '&#10148;',
       class: 'messages__send-btn',
       events: {
-        click: (e) => {
+        click: () => {
           validateForm();
-        }
-      }
+        },
+      },
     }),
-    chats: chats.map((chat: any) => chat),
+    chats: chats.map((chat: Chat) => chat),
   });
 
   renderDom(chatsPage);

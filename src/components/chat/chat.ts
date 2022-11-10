@@ -9,7 +9,7 @@ interface ChatProps {
   messagesCount: string;
 }
 
-export default class Chat extends Block {
+export default class Chat extends Block<ChatProps> {
   constructor(props: ChatProps) {
     super(props);
   }

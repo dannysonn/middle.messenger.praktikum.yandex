@@ -2,11 +2,11 @@ import Registration from './registration';
 import { renderDom } from '../../utils/renderDom';
 import Button from '../../components/button/button';
 import Input from '../../components/input/input';
-import {initInputsListEvents} from "../../utils/initInputsList";
-import {validateForm} from "../../utils/validateForm";
-import {Form} from "../../components/form/form";
+import { initInputsListEvents } from '../../utils/initInputsList';
+import { validateForm } from '../../utils/validateForm';
+import Form from '../../components/form/form';
 
-let inputs = [
+const inputs = [
   new Input({
     wrapperClass: 'authForm__item',
     id: 'authForm__email',
@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
         submit: (e: Event) => {
           e.preventDefault();
           validateForm();
-        }
-      }
+        },
+      },
     }),
     button: new Button({
       text: 'Register',

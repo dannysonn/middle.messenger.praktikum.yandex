@@ -8,7 +8,7 @@ interface ButtonProps {
   events?: any,
 }
 
-export default class Button extends Block {
+export default class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
     super(props);
   }

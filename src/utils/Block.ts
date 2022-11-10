@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
 
-export default class Block {
+export default class Block<Props extends {}> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -13,11 +13,11 @@ export default class Block {
 
   protected _meta: { props: any };
 
-  protected props: any;
+  protected props: Props;
 
   private eventBus;
 
-  protected children: Record<string, Block>;
+  protected children: Record<string, Block<Props>>;
 
   public id: string = nanoid(8);
 
@@ -97,7 +97,7 @@ export default class Block {
 
   // Может переопределять пользователь, необязательно трогать
   componentDidUpdate(oldProps: any, newProps?: any) {
-    console.log(JSON.stringify(oldProps) === JSON.stringify(newProps))
+    console.log(JSON.stringify(oldProps) === JSON.stringify(newProps));
     return true;
   }
 
@@ -138,8 +138,6 @@ export default class Block {
   }
 
   private _makePropsProxy(props: any) {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
     const self = this;
 
     return new Proxy(props, {

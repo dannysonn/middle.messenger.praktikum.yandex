@@ -68,7 +68,7 @@
 
 .invalid {
   color: red;
-  border-bottom: 1px solid red !important;
+  outline: 1px solid red !important;
 }
 
 .chats-sidebar {
@@ -324,7 +324,7 @@
   align-items: center;
   width: 5vw;
   height: 100vh;
-  background-color: #FBFBFB;
+  background-color: #fbfbfb;
 }
 .profile__btn {
   width: 28px;
@@ -347,8 +347,13 @@
 }
 .profile__item input {
   border: none;
-  outline: none;
   text-align: right;
+}
+.profile__item input:focus {
+  outline: 1px solid #3369f3;
+}
+.profile__item input:read-only {
+  outline: none;
 }
 .profile__header {
   text-align: center;

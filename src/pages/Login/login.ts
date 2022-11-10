@@ -5,7 +5,7 @@ interface LoginProps {
 
 }
 
-export default class Login extends Block {
+export default class Login extends Block<LoginProps> {
   constructor(props: LoginProps) {
     super(props);
   }
