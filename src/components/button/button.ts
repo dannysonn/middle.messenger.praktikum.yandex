@@ -1,0 +1,19 @@
+import template from './button.hbs';
+import Block from '../../utils/Block';
+
+interface ButtonProps {
+  text: string,
+  class: string,
+  formId?: string,
+  events?: any,
+}
+
+export default class Button extends Block<ButtonProps> {
+  constructor(props: ButtonProps) {
+    super(props);
+  }
+
+  render(): DocumentFragment {
+    return this.compile(template, { ...this.props });
+  }
+}

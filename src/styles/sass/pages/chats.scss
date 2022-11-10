@@ -3,10 +3,8 @@
 .chats-sidebar {
   height: 100%;
   width: 25vw;
-
-  border-right: 1px solid #EFEFEF;
-  background: #FBFBFB;
-
+  border-right: 1px solid #efefef;
+  background: #fbfbfb;
   position: fixed;
   top: 0;
   left: 0;
@@ -15,31 +13,26 @@
 .chats-header {
   display: flex;
   flex-wrap: wrap;
-
   background: #4e54c8; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #4e54c8, #8f94fb); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4e54c8, #8f94fb); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #4e54c8, #8f94fb);
   height: 100px;
-
   color: #4e54c8;
 
   &__search {
     width: 90%;
     height: 32px;
     margin: 0 auto;
-
     border-radius: 5px;
-    background: #FFFFFF;
+    background: #fff;
   }
 
   &__input {
     width: 100%;
     height: 100%;
     align-self: center;
-
     font-size: 14px;
     line-height: 12px;
-
     border: none;
     background: none;
     padding-left: 1vw;
@@ -52,18 +45,13 @@
       outline: none;
       color: #4e54c8;
     }
-
-    &::placeholder {
-
-    }
   }
 
   &__profile-link {
-    color: #FFFFFF;
+    color: #fff;
     font-size: 14px;
     line-height: 12px;
     text-decoration: none;
-
     margin: 23px 10px 0 auto;
   }
 }
@@ -74,14 +62,12 @@
 }
 
 .chat {
-  border-bottom: 1px solid #EFEFEF;
+  border-bottom: 1px solid #efefef;
   padding-top: 12px;
   padding-bottom: 12px;
   width: 100%;
   max-height: 70px;
-
   display: flex;
-
   list-style: none;
 
   &__item {
@@ -101,7 +87,7 @@
 
     .user-message {
       padding-left: 10px;
-      color: #999999;
+      color: #999;
     }
 
     &:last-child {
@@ -112,25 +98,20 @@
 
   &__info {
     height: 100%;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     text-align: right;
   }
 
   &__messages-count {
     width: 21px;
     height: 21px;
-
-    color: #FFFFFF;
+    color: #fff;
     text-align: center;
     font-size: 14px;
-
     background: #4e54c8;
     border-radius: 50%;
-
     align-self: flex-end;
 
     span {
@@ -141,15 +122,13 @@
   &__time {
     font-size: 11px;
     line-height: 13px;
-
-    color: #999999;
+    color: #999;
   }
 }
 
 .messages {
   display: flex;
   flex-direction: column;
-
   width: 75vw;
   margin-left: 25vw;
 
@@ -157,42 +136,34 @@
     display: flex;
     flex-direction: column;
     justify-content: end;
-
     width: 75vw;
     height: 100vh;
-
     position: fixed;
     bottom: 0;
-
     margin-bottom: 80px;
   }
 
   &__header {
     width: 75vw;
     height: 70px;
-
     display: flex;
     justify-content: space-between;
-
     position: fixed;
     z-index: 1000;
     top: 0;
-
-    border-bottom: 2px solid #EFEFEF;
-    background: #FFFFFF;
+    border-bottom: 2px solid #efefef;
+    background: #fff;
   }
 
   .user {
     display: flex;
     align-items: center;
-
-    margin: 10px 20px 10px;
+    margin: 10px 20px;
 
     &__avatar {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-
       margin-right: 10px;
     }
   }
@@ -200,23 +171,21 @@
   &__settings {
     display: flex;
     align-items: center;
-    margin: 10px 20px 10px;
+    margin: 10px 20px;
 
-    &:after {
-      content: '\22EE';
+    &::after {
+      content: "\22EE";
       font-size: 25px;
     }
   }
 
   &__friend-container {
     max-width: 25vw;
-    background: #F8F8F8;
+    background: #f8f8f8;
     border-radius: 10px;
-
     font-size: 14px;
     line-height: 15px;
-    color: #1E1E1E;
-
+    color: #1e1e1e;
     margin-left: 20px;
     margin-top: 30px;
     padding: 11px;
@@ -226,24 +195,19 @@
     text-align: center;
     font-size: 14px;
     line-height: 12px;
-
-    color: #999999;
-
+    color: #999;
     margin-top: 48px;
   }
 
   &__mine-container {
     max-width: 25vw;
-
     font-size: 14px;
     line-height: 15px;
-    color: #1E1E1E;
-
+    color: #1e1e1e;
     margin-left: auto;
     margin-right: 20px;
     padding: 11px;
-
-    background: #E4EDFD;
+    background: #e4edfd;
     border-radius: 10px;
   }
 
@@ -258,15 +222,12 @@
   &__footer {
     width: 75vw;
     height: 70px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     position: fixed;
     bottom: 0;
     z-index: 1000;
-
     margin: 20px 0 0;
   }
 
@@ -277,33 +238,25 @@
   &__text {
     display: flex;
     align-items: center;
-
     width: 63vw;
     height: 30px;
-
     line-height: 30px;
-
     outline: none;
     resize: none;
-
     border-radius: 30px;
     border: none;
-    background-color: #EFEFEF;
+    background-color: #efefef;
     padding-left: 20px;
   }
 
   &__send-btn {
     width: 35px;
     height: 35px;
-
-    color: #FFFFFF;
-
+    color: #fff;
     background-color: #4e54c8;
     border: none;
     border-radius: 50%;
-
     margin-right: 20px;
-
     cursor: pointer;
   }
 }
