@@ -6,6 +6,7 @@ import Form from '../../components/form/form';
 interface RegistrationProps {
   button: Button,
   form: Form,
+  signInBtn: Button
 }
 
 export default class Registration extends Block<RegistrationProps> {

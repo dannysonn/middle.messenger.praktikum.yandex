@@ -64,6 +64,7 @@
   color: #3369f3;
   background: none;
   border: none;
+  cursor: pointer;
 }
 
 .invalid {
@@ -120,6 +121,9 @@
   line-height: 12px;
   text-decoration: none;
   margin: 23px 10px 0 auto;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .chats-list {

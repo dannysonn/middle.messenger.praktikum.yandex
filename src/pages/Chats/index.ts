@@ -1,9 +1,10 @@
 import Chats from './chats';
-import { renderDom } from '../../utils/renderDom';
 import Chat from '../../components/chat/chat';
 import Button from '../../components/button/button';
 import { validateForm } from '../../utils/validateForm';
-import { initInputsListEvents } from '../../utils/initInputsList';
+import Router from "../../utils/Router";
+
+const router = new Router('root');
 
 const chats = [
   new Chat({
@@ -29,8 +30,8 @@ const chats = [
   }),
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
-  const chatsPage = new Chats({
+
+export const chatsPage = new Chats({
     button: new Button({
       text: '&#10148;',
       class: 'messages__send-btn',
@@ -40,10 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
         },
       },
     }),
+    profileBtn: new Button({
+      text: 'Profile link',
+      class: 'chats-header__profile-link',
+      events: {
+        click: () => {
+          window.location.href = '/profile';
+        }
+      }
+    }),
     chats: chats.map((chat: Chat) => chat),
   });
-
-  renderDom(chatsPage);
-
-  initInputsListEvents();
-});

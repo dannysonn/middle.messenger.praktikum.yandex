@@ -6,6 +6,7 @@ import Form from '../../components/form/form';
 interface ProfileProps {
   buttons: Button[],
   form: Form,
+  profileBtn: Button,
 }
 
 export default class Profile extends Block<ProfileProps> {

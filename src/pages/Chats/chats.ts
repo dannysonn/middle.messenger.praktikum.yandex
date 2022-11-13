@@ -5,6 +5,7 @@ import Chat from '../../components/chat/chat';
 
 interface ChatsProps {
   button: Button;
+  profileBtn?: Button;
   chats: Chat[];
   events?: any;
 }
