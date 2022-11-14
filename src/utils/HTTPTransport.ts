@@ -7,19 +7,22 @@ enum Methods {
   DELETE = 'DELETE',
 }
 
-type Options = { method: string, data: any, headers: Record<string, string> };
+export default class HTTPTransport {
+  static baseUrl: string;
 
-class HTTPTransport {
-  get = (url: string, options: Options) => this.request(url, { ...options, method: Methods.GET });
+  constructor(url: string) {
+    HTTPTransport.baseUrl = `https://ya-praktikum.tech/api/v2${url}`;
+  }
 
-  put = (url: string, options: Options) => this.request(url, { ...options, method: Methods.PUT });
+  get = (url: string) => this.request(`${HTTPTransport.baseUrl}${url}`, Methods.GET);
 
-  post = (url: string, options: Options) => this.request(url, { ...options, method: Methods.POST });
+  put = (url: string, data?: any, headers?: Record<string, string>) => this.request(`${HTTPTransport.baseUrl}${url}`, Methods.PUT, data, headers);
 
-  delete = (url: string, options: Options) => this.request(url, { ...options, method: Methods.DELETE });
+  post = (url: string, data?: any, headers?: Record<string, string>) => this.request(`${HTTPTransport.baseUrl}${url}`, Methods.POST, data, headers);
 
-  request = (url: string, options: Options, timeout = 5000) => {
-    const { method, data, headers } : Options = options;
+  delete = (url: string, data?: any, headers?: Record<string, string>) => this.request(`${HTTPTransport.baseUrl}${url}`, Methods.DELETE, data, headers);
+
+  request = (url: string, method: Methods, data?: any, headers?: Record<string, string>, timeout = 5000) => {
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -34,12 +37,24 @@ class HTTPTransport {
       xhr.timeout = timeout;
 
       xhr.onload = () => {
-        resolve(xhr);
+        if (xhr.status === 200) {
+          resolve(xhr.response);
+        } else {
+          if (xhr.response.reason === 'User already in system') {
+            window.location.href = '/chats'
+          }
+          reject(xhr.response);
+        }
       };
 
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
+      xhr.onabort = () => reject({reason: "abort"});
+      xhr.onerror = () => reject({reason: "error"});
+      xhr.ontimeout = () => reject({reason: "timeout"});
+
+      xhr.setRequestHeader("Content-type", "application/json");
+
+      xhr.withCredentials = true;
+      xhr.responseType = "json";
 
       if (method === Methods.GET || !data) {
         xhr.send();

@@ -4,6 +4,7 @@ import Input from '../../components/input/input';
 import Form from '../../components/form/form';
 
 import {validateForm} from '../../utils/validateForm';
+import AuthController from "../../controllers/AuthController";
 
 const inputs = [
     new Input({
@@ -33,7 +34,9 @@ export const loginPage = new Login({
         events: {
             submit: (e: Event) => {
                 e.preventDefault();
-                validateForm();
+
+                let data = validateForm();
+                AuthController.signIn(data);
             },
         },
     }),
@@ -43,7 +46,7 @@ export const loginPage = new Login({
         formId: 'authForm',
         events: {
             click: () => {
-                window.location.href = '/chats';
+
             }
         }
     }),

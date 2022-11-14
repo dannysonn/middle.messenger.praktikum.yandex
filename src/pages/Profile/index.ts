@@ -6,6 +6,7 @@ import {initInputsListEvents} from '../../utils/initInputsList';
 import {validateForm} from '../../utils/validateForm';
 import Form from '../../components/form/form';
 import {router} from "../../index";
+import AuthController from "../../controllers/AuthController";
 
 const profileButtons = [
     new Button({
@@ -33,6 +34,8 @@ const profileButtons = [
         text: 'Logout',
         events: {
             click: () => {
+                AuthController.logout();
+
                 window.location.href = '/';
             }
         }

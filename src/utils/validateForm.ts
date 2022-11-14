@@ -9,7 +9,7 @@ export const validateForm = () => {
   });
 
   if (isValid) {
-    console.log(getFormObject());
+    return getFormObject();
   } else {
     throw new Error('Form validation error');
   }
@@ -17,10 +17,10 @@ export const validateForm = () => {
 
 let getFormObject = () => {
   const inputs = document.querySelectorAll('input');
-  const resultObject = {};
+  const resultObject: any = {};
 
   inputs.forEach((input) => {
-    const key: string | null = input.getAttribute('type');
+    const key: string | null = input.getAttribute('name');
     const { value } = input;
 
     resultObject[`${key}`] = value;

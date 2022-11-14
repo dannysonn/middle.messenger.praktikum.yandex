@@ -1,8 +1,9 @@
 import Registration from './registration';
 import Button from '../../components/button/button';
 import Input from '../../components/input/input';
-import {validateForm} from '../../utils/validateForm';
 import Form from '../../components/form/form';
+import AuthController from "../../controllers/AuthController";
+import {validateForm} from "../../utils/validateForm";
 
 const inputs = [
     new Input({
@@ -59,15 +60,6 @@ const inputs = [
         name: 'password',
         hasLineBreak: true,
     }),
-    new Input({
-        wrapperClass: 'authForm__item',
-        id: 'authForm__password-second',
-        label: 'Password (one more)',
-        type: 'password',
-        placeholder: '**********',
-        name: 'second_password',
-        hasLineBreak: true,
-    }),
 ];
 
 
@@ -78,7 +70,9 @@ export const registrationPage = new Registration({
         events: {
             submit: (e: Event) => {
                 e.preventDefault();
-                validateForm();
+
+                let data = validateForm();
+                AuthController.signUp(data);
             },
         },
     }),
@@ -88,7 +82,7 @@ export const registrationPage = new Registration({
         formId: 'authForm',
         events: {
             click: () => {
-                window.location.href = '/chats';
+
             }
         }
     }),
