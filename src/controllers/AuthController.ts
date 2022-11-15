@@ -1,29 +1,32 @@
-import {AuthApi} from "../api/AuthApi";
+import AuthApi from '../api/AuthApi';
+import { router } from '../index';
 
 class AuthController {
-    api: any;
+  api: any;
 
-    constructor() {
-        this.api = new AuthApi();
-    }
+  constructor() {
+    this.api = new AuthApi();
+  }
 
-    getUser() {
-        this.api.getUser();
-    }
+  async getUser() {
+    await this.api.getUser();
+  }
 
-    signIn(data: any) {
-        this.api.signIn(data);
+  async signIn(data: any) {
+    await this.api.signIn(data);
 
-    }
+    window.location.href = '/chats';
+  }
 
-    signUp(data: any) {
-        this.api.signUp(data);
+  async signUp(data: any) {
+    await this.api.signUp(data);
 
-    }
+    window.location.href = '/chats';
+  }
 
-    logout() {
-        this.api.logout();
-    }
+  async logout() {
+    await this.api.logout();
+  }
 }
 
 export default new AuthController();

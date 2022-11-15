@@ -41,9 +41,11 @@ export default class HTTPTransport {
           resolve(xhr.response);
         } else {
           if (xhr.response.reason === 'User already in system') {
-            window.location.href = '/chats'
+            window.location.href = '/chats';
           }
           reject(xhr.response);
+
+          throw new Error(xhr.response);
         }
       };
 
