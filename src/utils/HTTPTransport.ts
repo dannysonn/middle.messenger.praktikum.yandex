@@ -1,4 +1,5 @@
 import { queryStringify } from './queryStringify';
+import {router} from "../index";
 
 enum Methods {
   GET = 'GET',
@@ -41,7 +42,7 @@ export default class HTTPTransport {
           resolve(xhr.response);
         } else {
           if (xhr.response.reason === 'User already in system') {
-            window.location.href = '/chats';
+            router.go('/chats');
           }
           reject(xhr.response);
 

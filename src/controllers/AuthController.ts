@@ -1,5 +1,6 @@
 import AuthApi from '../api/AuthApi';
 import { router } from '../index';
+import {store} from "../utils/Store";
 
 class AuthController {
   api: any;
@@ -9,19 +10,20 @@ class AuthController {
   }
 
   async getUser() {
-    await this.api.getUser();
+    await this.api.getUser()
+      .then((data: any) => store.set('user', data));
   }
 
   async signIn(data: any) {
     await this.api.signIn(data);
 
-    window.location.href = '/chats';
+    router.go('/chats');
   }
 
   async signUp(data: any) {
     await this.api.signUp(data);
 
-    window.location.href = '/chats';
+    router.go('/chats');
   }
 
   async logout() {

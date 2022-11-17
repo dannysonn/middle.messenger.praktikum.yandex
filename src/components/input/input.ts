@@ -12,6 +12,7 @@ interface InputProps {
   name: string;
   hasLineBreak: boolean;
   readonly?: boolean;
+  events?: any;
 }
 
 export default class Input extends Block<InputProps> {

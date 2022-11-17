@@ -1,13 +1,8 @@
-type Callback = (...args: any[]) => void;
-
+type Handler = (...args: unknown[]) => void;
 export default class EventBus {
-  private readonly listeners: Record<string, Callback[]>;
+  private listeners: Record<string, Handler[]> = {};
 
-  constructor() {
-    this.listeners = {};
-  }
-
-  public on(event: string, callback: Callback) {
+  on(event: string, callback: Handler):void {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -15,7 +10,7 @@ export default class EventBus {
     this.listeners[event].push(callback);
   }
 
-  public off(event: string, callback: Callback) {
+  off(event: string, callback: Handler) {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
@@ -25,9 +20,9 @@ export default class EventBus {
     );
   }
 
-  public emit(event: string, ...args: any[]) {
+  emit(event: string, ...args: unknown[]): void {
     if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      return;
     }
 
     this.listeners[event].forEach((listener) => {

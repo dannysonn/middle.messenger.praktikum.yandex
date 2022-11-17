@@ -1,23 +1,22 @@
-import {loginPage} from "./pages/Login";
-import Router from "./utils/Router";
-import {initInputsListEvents} from "./utils/initInputsList";
-import {chatsPage} from "./pages/Chats";
-import {error4Page} from "./pages/Error4";
-import {error5Page} from "./pages/Error5";
-import {profilePage} from "./pages/Profile";
-import {registrationPage} from "./pages/Registration";
+import AuthController from './controllers/AuthController';
+import Router from './utils/Router';
+import { initInputsListEvents } from './utils/initInputsList';
+import Login from './pages/Login/index';
+import Chats from './pages/Chats';
+import Registration from './pages/Registration';
+import Profile from './pages/Profile';
 
-export const router = new Router("root");
+export const router = new Router('root');
 
-document.addEventListener('DOMContentLoaded', () => {
-    router
-        .use('/', loginPage)
-        .use('/chats', chatsPage)
-        .use('/error4', error4Page)
-        .use('/error5', error5Page)
-        .use('/profile', profilePage)
-        .use('/registration', registrationPage)
-        .start();
+document.addEventListener('DOMContentLoaded', async () => {
+  await AuthController.getUser();
 
-    initInputsListEvents();
+  router
+    .use('/', Login, {})
+    .use('/chats', Chats, {})
+    .use('/registration', Registration, {})
+    .use('/profile', Profile, {})
+    .start();
+
+  initInputsListEvents();
 });

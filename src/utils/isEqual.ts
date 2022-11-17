@@ -1,23 +1,29 @@
-type PlainObject<T = any> = {
+type PlainObject<T = unknown> = {
   [k in string]: T;
 };
 
-function isPlainObject(value: unknown): value is PlainObject {
-  return typeof value === 'object'
-        && value !== null
-        && value.constructor === Object
-        && Object.prototype.toString.call(value) === '[object Object]';
-}
+export type Indexed<T = any> = {
+  [key in string]: T;
+};
 
 function isArray(value: unknown): value is [] {
   return Array.isArray(value);
+}
+
+export function isPlainObject(value: unknown): value is PlainObject {
+  return (
+    typeof value === 'object'
+      && value !== null
+      && value.constructor === Object
+      && Object.prototype.toString.call(value) === '[object Object]'
+  );
 }
 
 function isArrayOrObject(value: unknown): value is [] | PlainObject {
   return isPlainObject(value) || isArray(value);
 }
 
-function isEqual(lhs: PlainObject, rhs: PlainObject) {
+function isEqual(lhs: Indexed, rhs: Indexed) {
   if (Object.keys(lhs).length !== Object.keys(rhs).length) {
     return false;
   }
@@ -39,4 +45,4 @@ function isEqual(lhs: PlainObject, rhs: PlainObject) {
   return true;
 }
 
-export default isEqual;
+export { isEqual };
