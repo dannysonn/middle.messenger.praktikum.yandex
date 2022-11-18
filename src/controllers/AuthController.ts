@@ -1,6 +1,6 @@
 import AuthApi from '../api/AuthApi';
 import { router } from '../index';
-import {store} from "../utils/Store";
+import { store } from '../utils/Store';
 
 class AuthController {
   api: any;

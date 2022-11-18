@@ -214,6 +214,14 @@ export default class Block<Props extends {}> {
     return fragment.content;
   }
 
+  show() {
+    this.getContent().style.display = 'block';
+  }
+
+  hide() {
+    this.getContent().style.display = 'none';
+  }
+
   protected initChildren():void {
 
   }

@@ -11,6 +11,7 @@ export const validateForm = () => {
   if (isValid) {
     return getFormObject();
   } else {
+    alert('invalid form');
     throw new Error('Form validation error');
   }
 };

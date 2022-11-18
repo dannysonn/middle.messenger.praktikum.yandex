@@ -1,22 +1,22 @@
 import HTTPTransport from '../utils/HTTPTransport';
 
 class AuthApi {
-  static chatAPIInstance = new HTTPTransport('/auth');
+  static chatAPIInstance = new HTTPTransport();
 
   public getUser() {
-    return AuthApi.chatAPIInstance.get('/user');
+    return AuthApi.chatAPIInstance.get('/auth/user');
   }
 
   public signIn(data: any) {
-    return AuthApi.chatAPIInstance.post('/signin', data);
+    return AuthApi.chatAPIInstance.post('/auth/signin', data);
   }
 
   public signUp(data: any) {
-    return AuthApi.chatAPIInstance.post('/signup', data);
+    return AuthApi.chatAPIInstance.post('/auth/signup', data);
   }
 
   public logout() {
-    return AuthApi.chatAPIInstance.post('/logout');
+    return AuthApi.chatAPIInstance.post('/auth/logout');
   }
 }
 

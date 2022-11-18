@@ -1,11 +1,12 @@
 import Block from '../../utils/Block';
-import template from './profile.hbs';
+import template from '../Profile/profile.hbs';
 import Button from '../../components/button/button';
 import Form from '../../components/form/form';
-import { initInputsListEvents } from '../../utils/initInputsList';
-import AuthController from '../../controllers/AuthController';
 import Input from '../../components/input/input';
 import Router from '../../utils/Router';
+import UserController from '../../controllers/UserController';
+import { validateForm } from '../../utils/validateForm';
+import {router} from "../../index";
 
 interface ProfileProps {
   buttons: Button[],
@@ -13,7 +14,7 @@ interface ProfileProps {
   profileBtn: Button,
 }
 
-export class Profile extends Block<ProfileProps> {
+export class ProfileChangeData extends Block<ProfileProps> {
   constructor(props: ProfileProps) {
     super(props);
   }
@@ -78,42 +79,48 @@ export class Profile extends Block<ProfileProps> {
           hasLineBreak: false,
         }),
       ],
+
+      events: {
+        submit: (event) => {
+          event.preventDefault();
+
+          validateForm();
+
+          const inputs = document.querySelectorAll('input');
+
+          const userData = {
+            display_name: 'null',
+          };
+
+          inputs.forEach((input: any) => {
+            userData[input.name] = input.value;
+          });
+
+          UserController.changeUserData(userData)
+            .then(() => {
+              let router = new Router();
+              router.go('/profile');
+            });
+        },
+      },
     });
 
     this.children.buttons = [
       new Button({
         class: 'profile__footer-item',
-        text: 'Change data',
+        text: 'Save data',
+        formId: 'profileForm',
+        type: 'submit',
         events: {
           click: () => {
-            const router = new Router();
-            router.go('/profileChangeData');
-
-            initInputsListEvents();
-          },
-        },
-      }),
-      new Button({
-        class: 'profile__footer-item',
-        text: 'Change password',
-        events: {
-          click: () => {
-            const router = new Router();
-            router.go('/profileChangePassword');
-
-            initInputsListEvents();
-          },
-        },
-      }),
-      new Button({
-        class: 'profile__footer-item profile__footer-item--logout',
-        text: 'Logout',
-        events: {
-          click: () => {
-            AuthController.logout();
-
-            const router = new Router();
-            router.go('/');
+            // const form = document.getElementById('profileForm');
+            //
+            // const userData = new FormData(form);
+            // debugger;
+            // UserController.changeUserData(userData);
+            //
+            // const router = new Router();
+            // router.go('/profile');
           },
         },
       }),

@@ -5,6 +5,8 @@ import Login from './pages/Login/index';
 import Chats from './pages/Chats';
 import Registration from './pages/Registration';
 import Profile from './pages/Profile';
+import ProfileChangeData from './pages/ProfileChangeData';
+import ProfileChangePassword from './pages/ProfileChangePassword';
 
 export const router = new Router('root');
 
@@ -16,6 +18,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     .use('/chats', Chats, {})
     .use('/registration', Registration, {})
     .use('/profile', Profile, {})
+    .use('/profileChangeData', ProfileChangeData, {})
+    .use('/profileChangePassword', ProfileChangePassword, {})
     .start();
 
   initInputsListEvents();
