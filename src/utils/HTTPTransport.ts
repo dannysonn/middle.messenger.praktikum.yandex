@@ -12,7 +12,7 @@ export default class HTTPTransport {
   static baseUrl: string;
 
   constructor() {
-    HTTPTransport.baseUrl = `https://ya-praktikum.tech/api/v2`;
+    HTTPTransport.baseUrl = 'https://ya-praktikum.tech/api/v2';
   }
 
   get = (url: string) => this.request(`${HTTPTransport.baseUrl}${url}`, Methods.GET);
@@ -39,6 +39,8 @@ export default class HTTPTransport {
       if (xhr.status === 200) {
         resolve(xhr.response);
       } else {
+        alert(xhr.response.reason);
+
         if (xhr.response.reason === 'User already in system') {
           router.go('/chats');
         }

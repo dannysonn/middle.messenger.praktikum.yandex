@@ -1,6 +1,13 @@
-import Route from "./route";
+import Route from './route';
+import Block from './Block';
 
 export default class Router {
+  routes: Route[];
+
+  history: History;
+
+  private _currentRoute: Route | null;
+
   constructor() {
     if (Router.__instance) {
       return Router.__instance;
@@ -13,7 +20,7 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname, block, props) {
+  use(pathname: string, block: Block, props: any) {
     const route = new Route(pathname, block, props);
     this.routes.push(route);
 
@@ -22,13 +29,13 @@ export default class Router {
 
   start() {
     window.onpopstate = ((event) => {
-      this._onRoute(event.currentTarget.location.pathname);
-    }).bind(this);
+      this._onRoute(event.currentTarget?.location.pathname);
+    });
 
     this._onRoute(window.location.pathname);
   }
 
-  private _onRoute(pathname) {
+  private _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
 
     if (!route) {
@@ -39,11 +46,11 @@ export default class Router {
       this._currentRoute.leave();
     }
     this._currentRoute = route;
-    route.render(route, pathname);
+    route.render();
   }
 
-  go(pathname) {
-    this.history.pushState({}, "", pathname);
+  go(pathname: string) {
+    this.history.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
 
@@ -55,7 +62,7 @@ export default class Router {
     this.history.forward();
   }
 
-  getRoute(pathname) {
+  getRoute(pathname: string) {
     return this.routes.find((route) => route.match(pathname));
   }
 }

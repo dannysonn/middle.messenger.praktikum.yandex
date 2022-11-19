@@ -6,6 +6,7 @@ import Input from '../../components/input/input';
 import { validateForm } from '../../utils/validateForm';
 import AuthController from '../../controllers/AuthController';
 import {router} from "../../index";
+import {store} from "../../utils/Store";
 
 const inputs = [
   new Input({
@@ -80,11 +81,16 @@ export class Registration extends Block<RegistrationProps> {
       formId: 'authForm',
       inputs: inputs.map((input: any) => input),
       events: {
-        submit: (e: Event) => {
+        submit: async (e: Event) => {
           e.preventDefault();
 
           const data = validateForm();
-          AuthController.signUp(data);
+          await AuthController.signUp(data).then(() => {
+            AuthController.getUser();
+
+            localStorage.setItem('currentPassword', `${data.password}`);
+            router.go('/chats');
+          });
         },
       },
     });
@@ -95,7 +101,6 @@ export class Registration extends Block<RegistrationProps> {
       formId: 'authForm',
       events: {
         click: () => {
-          router.go('/chats');
         },
       },
     });

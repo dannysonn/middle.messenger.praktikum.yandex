@@ -11,8 +11,6 @@ import ProfileChangePassword from './pages/ProfileChangePassword';
 export const router = new Router('root');
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await AuthController.getUser();
-
   router
     .use('/', Login, {})
     .use('/chats', Chats, {})
@@ -23,4 +21,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     .start();
 
   initInputsListEvents();
+
+  await AuthController.getUser();
 });

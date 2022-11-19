@@ -5,7 +5,8 @@ import Form from '../../components/form/form';
 import { validateForm } from '../../utils/validateForm';
 import AuthController from '../../controllers/AuthController';
 import Button from '../../components/button/button';
-import Router from "../../utils/Router";
+import { router } from '../../index';
+import { store } from '../../utils/Store';
 
 const inputsData = [
   new Input({
@@ -33,6 +34,7 @@ interface LoginProps {
 
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export class Login extends Block<LoginProps> {
   constructor(props: LoginProps) {
     super(props);
@@ -43,11 +45,17 @@ export class Login extends Block<LoginProps> {
       formId: 'authForm',
       inputs: inputsData.map((input: any) => input),
       events: {
-        submit: (e: Event) => {
+        submit: async (e: Event) => {
           e.preventDefault();
 
           const data = validateForm();
-          AuthController.signIn(data);
+
+          await AuthController.signIn(data).then(() => {
+            AuthController.getUser();
+
+            localStorage.setItem('currentPassword', `${data.password}`);
+            router.go('/chats');
+          });
         },
       },
     });
@@ -57,7 +65,6 @@ export class Login extends Block<LoginProps> {
       class: 'registration__link',
       events: {
         click: () => {
-          const router = new Router();
           router.go('/registration');
         },
       },

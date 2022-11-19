@@ -6,11 +6,17 @@ import Input from '../../components/input/input';
 import Router from '../../utils/Router';
 import { validateForm } from '../../utils/validateForm';
 import UserController from '../../controllers/UserController';
+import { store } from '../../utils/Store';
 
 interface ProfileProps {
   buttons: Button[],
   form: Form,
   profileBtn: Button,
+}
+
+interface PasswordData {
+  oldPassword: string,
+  newPassword: string,
 }
 
 export class ProfileChangePassword extends Block<ProfileProps> {
@@ -27,7 +33,7 @@ export class ProfileChangePassword extends Block<ProfileProps> {
           labelClass: 'content__item-label',
           inputClass: 'content__item-data',
           id: 'authForm__password',
-          label: 'Password',
+          label: 'Current password',
           type: 'password',
           placeholder: '**********',
           name: 'password',
@@ -38,7 +44,7 @@ export class ProfileChangePassword extends Block<ProfileProps> {
           labelClass: 'content__item-label',
           inputClass: 'content__item-data',
           id: 'authForm__password-second',
-          label: 'Password (one more)',
+          label: 'New password',
           type: 'password',
           placeholder: '**********',
           name: 'second_password',
@@ -47,29 +53,27 @@ export class ProfileChangePassword extends Block<ProfileProps> {
       ],
 
       events: {
-        submit: (event) => {
+        submit: async (event: Event) => {
           event.preventDefault();
 
           validateForm();
 
           const inputs = document.querySelectorAll('input');
 
-          const userData = {
-            display_name: 'null',
+          const oldPassword = inputs[0].value;
+          const newPassword = inputs[1].value;
+
+          const passwordData: PasswordData = {
+            oldPassword,
+            newPassword,
           };
 
-          inputs.forEach((input: any) => {
-            userData[input.name] = input.value;
-          });
-
-          debugger
-          UserController.changeUserPassword(
-            userData,
-          )
-            .then(() => {
-              const router = new Router();
-              router.go('/profile');
-            });
+          if (oldPassword !== localStorage.getItem('currentPassword')) {
+            alert('Wrong current password');
+          } else {
+            await UserController.changeUserPassword(passwordData);
+            localStorage.setItem('currentPassword', `${newPassword}`);
+          }
         },
       },
     });

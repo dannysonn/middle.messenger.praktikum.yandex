@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const validateForm = () => {
   let isValid: boolean = true;
   const inputs = document.querySelectorAll('input');
@@ -9,11 +10,11 @@ export const validateForm = () => {
   });
 
   if (isValid) {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     return getFormObject();
-  } else {
-    alert('invalid form');
-    throw new Error('Form validation error');
   }
+  alert('invalid form');
+  throw new Error('Form validation error');
 };
 
 let getFormObject = () => {

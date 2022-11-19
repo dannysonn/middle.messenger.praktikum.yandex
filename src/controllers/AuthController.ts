@@ -11,13 +11,13 @@ class AuthController {
 
   async getUser() {
     await this.api.getUser()
-      .then((data: any) => store.set('user', data));
+      .then((data: any) => {
+        store.set('user', data);
+      });
   }
 
   async signIn(data: any) {
     await this.api.signIn(data);
-
-    router.go('/chats');
   }
 
   async signUp(data: any) {

@@ -11,21 +11,6 @@ export enum StoreEvents {
   Updated = 'updated',
 }
 
-interface User {
-  id: number;
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  login: string;
-  email: string;
-  phone: string;
-  avatar: string;
-}
-
-interface StoreData {
-  currentUser?: User;
-}
-
 export class Store extends EventBus {
   private state: Indexed = {};
 
@@ -33,7 +18,7 @@ export class Store extends EventBus {
     return this.state;
   }
 
-  public set(path: keyof StoreData, value: unknown) {
+  public set(path: string, value: unknown) {
     set(this.state, path, value);
     this.emit(StoreEvents.Updated);
   }

@@ -3,10 +3,11 @@ import template from '../Profile/profile.hbs';
 import Button from '../../components/button/button';
 import Form from '../../components/form/form';
 import Input from '../../components/input/input';
-import Router from '../../utils/Router';
+// eslint-disable-next-line import/no-cycle
 import UserController from '../../controllers/UserController';
 import { validateForm } from '../../utils/validateForm';
-import {router} from "../../index";
+// eslint-disable-next-line import/no-cycle
+import { router } from '../../index';
 
 interface ProfileProps {
   buttons: Button[],
@@ -14,6 +15,7 @@ interface ProfileProps {
   profileBtn: Button,
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export class ProfileChangeData extends Block<ProfileProps> {
   constructor(props: ProfileProps) {
     super(props);
@@ -81,7 +83,7 @@ export class ProfileChangeData extends Block<ProfileProps> {
       ],
 
       events: {
-        submit: (event) => {
+        submit: (event: Event) => {
           event.preventDefault();
 
           validateForm();
@@ -93,12 +95,12 @@ export class ProfileChangeData extends Block<ProfileProps> {
           };
 
           inputs.forEach((input: any) => {
+            // @ts-ignore
             userData[input.name] = input.value;
           });
 
           UserController.changeUserData(userData)
-            .then(() => {
-              let router = new Router();
+            .then(async () => {
               router.go('/profile');
             });
         },
@@ -113,14 +115,7 @@ export class ProfileChangeData extends Block<ProfileProps> {
         type: 'submit',
         events: {
           click: () => {
-            // const form = document.getElementById('profileForm');
-            //
-            // const userData = new FormData(form);
-            // debugger;
-            // UserController.changeUserData(userData);
-            //
-            // const router = new Router();
-            // router.go('/profile');
+
           },
         },
       }),
@@ -131,7 +126,6 @@ export class ProfileChangeData extends Block<ProfileProps> {
       class: 'profile__btn',
       events: {
         click: () => {
-          const router = new Router();
           router.go('/chats');
         },
       },
