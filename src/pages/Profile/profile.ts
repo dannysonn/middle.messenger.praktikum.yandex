@@ -6,6 +6,9 @@ import { initInputsListEvents } from '../../utils/initInputsList';
 import AuthController from '../../controllers/AuthController';
 import Input from '../../components/input/input';
 import Router from '../../utils/Router';
+import UserAvatar from '../../components/userAvatar/userAvatar';
+import UserController from '../../controllers/UserController';
+import UserAvatarForm from '../../components/userAvatarForm/userAvatarForm';
 
 interface ProfileProps {
   buttons: Button[],
@@ -126,6 +129,25 @@ export class Profile extends Block<ProfileProps> {
         click: () => {
           const router = new Router();
           router.go('/chats');
+        },
+      },
+    });
+
+    this.children.userAvatar = new UserAvatarForm({
+      avatar: this.props?.avatar,
+      events: {
+        submit: async (e) => {
+          e.preventDefault();
+
+          const inputFile = document.getElementById('avatar');
+
+          const formData = new FormData();
+
+          console.log(inputFile.files[0]);
+
+          formData.append('inputFile', inputFile.files[0]);
+
+          await UserController.changeUserAvatar(formData);
         },
       },
     });

@@ -14,6 +14,10 @@ class UserController {
   async changeUserPassword(data: any) {
     await this.api.changeUserPassword(data);
   }
+
+  async changeUserAvatar(data: any) {
+    await this.api.changeUserAvatar(data);
+  }
 }
 
 export default new UserController();

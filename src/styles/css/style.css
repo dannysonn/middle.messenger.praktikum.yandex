@@ -366,6 +366,12 @@
 .profile__avatar {
   border-radius: 50%;
   margin-bottom: 21px;
+  cursor: pointer;
+  transition: scale 0.5s;
+}
+.profile__avatar:hover {
+  transform: scale(1.1);
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 }
 .profile__content {
   width: 100%;
@@ -388,6 +394,11 @@
 }
 .profile__footer-item--logout {
   color: #f00;
+}
+
+.avatar-form {
+  display: flex;
+  flex-direction: column;
 }
 
 .error {
