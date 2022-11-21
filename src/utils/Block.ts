@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
 import { isEqual } from './isEqual';
+import {render} from "./render";
 
 export default class Block<Props extends {}> {
   static EVENTS = {

@@ -83,7 +83,7 @@ export class ProfileChangeData extends Block<ProfileProps> {
       ],
 
       events: {
-        submit: (event: Event) => {
+        submit: async (event: Event) => {
           event.preventDefault();
 
           validateForm();
@@ -99,10 +99,9 @@ export class ProfileChangeData extends Block<ProfileProps> {
             userData[input.name] = input.value;
           });
 
-          UserController.changeUserData(userData)
-            .then(async () => {
-              router.go('/profile');
-            });
+          await UserController.changeUserData(userData).then(() => {
+            alert('Data changed');
+          });
         },
       },
     });

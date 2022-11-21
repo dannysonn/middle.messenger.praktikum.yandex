@@ -9,6 +9,7 @@ import Router from '../../utils/Router';
 import UserAvatar from '../../components/userAvatar/userAvatar';
 import UserController from '../../controllers/UserController';
 import UserAvatarForm from '../../components/userAvatarForm/userAvatarForm';
+import {store, StoreEvents} from "../../utils/Store";
 
 interface ProfileProps {
   buttons: Button[],
@@ -19,6 +20,10 @@ interface ProfileProps {
 export class Profile extends Block<ProfileProps> {
   constructor(props: ProfileProps) {
     super(props);
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+    });
   }
 
   protected initChildren() {
@@ -143,11 +148,11 @@ export class Profile extends Block<ProfileProps> {
 
           const formData = new FormData();
 
-          console.log(inputFile.files[0]);
+          formData.append('avatar', inputFile?.files[0]);
 
-          formData.append('inputFile', inputFile.files[0]);
+          let result = await UserController.changeUserAvatar(formData);
 
-          await UserController.changeUserAvatar(formData);
+          console.log(result)
         },
       },
     });

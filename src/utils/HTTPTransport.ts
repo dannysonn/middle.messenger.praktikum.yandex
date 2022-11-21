@@ -54,13 +54,17 @@ export default class HTTPTransport {
     xhr.onerror = () => reject({ reason: 'error' });
     xhr.ontimeout = () => reject({ reason: 'timeout' });
 
-    xhr.setRequestHeader('Content-type', 'application/json');
+    if (!headers) {
+      xhr.setRequestHeader('Content-type', 'application/json');
+    }
 
     xhr.withCredentials = true;
     xhr.responseType = 'json';
 
     if (method === Methods.GET || !data) {
       xhr.send();
+    } else if (headers) {
+      xhr.send(data);
     } else {
       xhr.send(JSON.stringify(data));
     }

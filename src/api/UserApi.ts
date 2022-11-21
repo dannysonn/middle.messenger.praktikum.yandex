@@ -12,7 +12,7 @@ class UserApi {
   }
 
   public changeUserAvatar(data: any) {
-    return UserApi.chatAPIInstance.put('/user/profile/avatar', data);
+    return UserApi.chatAPIInstance.put('/user/profile/avatar', data, {});
   }
 }
 

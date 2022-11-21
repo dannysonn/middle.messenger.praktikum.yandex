@@ -1,4 +1,5 @@
 import UserApi from '../api/UserApi';
+import {store} from "../utils/Store";
 
 class UserController {
   api: any;
@@ -8,7 +9,9 @@ class UserController {
   }
 
   async changeUserData(data: any) {
-    await this.api.changeUserData(data);
+    await this.api.changeUserData(data).then((result) => {
+      store.set('user', result);
+    });
   }
 
   async changeUserPassword(data: any) {
@@ -16,7 +19,9 @@ class UserController {
   }
 
   async changeUserAvatar(data: any) {
-    await this.api.changeUserAvatar(data);
+    await this.api.changeUserAvatar(data).then((result) => {
+      store.set('user', result);
+    });
   }
 }
 
