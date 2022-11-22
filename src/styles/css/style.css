@@ -72,6 +72,11 @@
   outline: 1px solid red !important;
 }
 
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 .chats-sidebar {
   height: 100%;
   width: 25vw;
@@ -80,6 +85,11 @@
   position: fixed;
   top: 0;
   left: 0;
+  overflow: scroll;
+}
+.chats-sidebar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .chats-header {
@@ -198,14 +208,12 @@
   flex-direction: column;
   justify-content: end;
   width: 75vw;
-  height: 100vh;
-  position: fixed;
-  bottom: 0;
-  margin-bottom: 80px;
+  margin-bottom: 15vh;
+  margin-top: 10vh;
 }
 .messages__header {
   width: 75vw;
-  height: 70px;
+  height: 10vh;
   display: flex;
   justify-content: space-between;
   position: fixed;
@@ -271,7 +279,7 @@
 }
 .messages__footer {
   width: 75vw;
-  height: 70px;
+  height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -279,6 +287,8 @@
   bottom: 0;
   z-index: 1000;
   margin: 20px 0 0;
+  border-top: 1px solid black;
+  background: white;
 }
 .messages #addFile {
   display: none;

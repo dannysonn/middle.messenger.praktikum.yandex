@@ -66,10 +66,25 @@ export class Chats extends Block<ChatsProps> {
       },
     });
 
-    this.children.chats = chats.map((chat: Chat) => chat);
+    this.children.chats = [];
+
+    if (this.props?.chats) {
+      Object.entries(this.props.chats).map(([key, chat]: [string, any]) => {
+        this.children.chats.push(
+          new Chat({
+            userAvatar: this.props?.avatar ? this.props.avatar : 'https://via.placeholder.com/150',
+            userName: 'chat.last_message.user.first_name',
+            message: 'chat.last_message.content',
+            time: '10:20',
+            messagesCount: chat.unread_count,
+          }),
+        );
+      });
+    }
   }
 
   render(): DocumentFragment {
+    console.log(this.props);
     return this.compile(template, { ...this.props });
   }
 }
