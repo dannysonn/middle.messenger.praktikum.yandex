@@ -150,9 +150,7 @@ export class Profile extends Block<ProfileProps> {
 
           formData.append('avatar', inputFile?.files[0]);
 
-          let result = await UserController.changeUserAvatar(formData);
-
-          console.log(result)
+          await UserController.changeUserAvatar(formData);
         },
       },
     });

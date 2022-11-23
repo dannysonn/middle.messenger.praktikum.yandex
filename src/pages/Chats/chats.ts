@@ -4,36 +4,13 @@ import Button from '../../components/button/button';
 import Chat from '../../components/chat/chat';
 import { validateForm } from '../../utils/validateForm';
 import Router from '../../utils/Router';
-import Profile from '../Profile/profile';
-
-const chats = [
-  new Chat({
-    userAvatar: '',
-    userName: 'John',
-    message: 'lorem ipsum.',
-    time: '10:30',
-    messagesCount: '5',
-  }),
-  new Chat({
-    userAvatar: '',
-    userName: 'Danila',
-    message: 'Ya ochen',
-    time: '10:30',
-    messagesCount: '3',
-  }),
-  new Chat({
-    userAvatar: '',
-    userName: 'Irina',
-    message: 'Ystaaaaal.',
-    time: '10:30',
-    messagesCount: '4',
-  }),
-];
+import ChatsController from '../../controllers/ChatsController';
+import { store, StoreEvents } from '../../utils/Store';
 
 interface ChatsProps {
   button: Button;
   profileBtn?: Button;
-  chats: Chat[];
+  chatList: Chat[];
   events?: any;
 }
 
@@ -41,6 +18,11 @@ export class Chats extends Block<ChatsProps> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(props: ChatsProps) {
     super(props);
+
+    store.on(StoreEvents.Updated, () => {
+      // вызываем обновление компонента, передав данные из хранилища
+      this.setProps(store.getState());
+    });
   }
 
   protected initChildren() {
@@ -66,17 +48,53 @@ export class Chats extends Block<ChatsProps> {
       },
     });
 
+    this.children.newChatBtn = new Button({
+      text: 'Create new chat',
+      class: 'chats-header__btn',
+      type: 'submit',
+      events: {
+        click: async (e: Event) => {
+          e.preventDefault();
+
+          let title = document.getElementById('new-chat')?.value;
+          const data = {
+            title,
+          };
+
+          await ChatsController.createChat(data);
+
+          title = '';
+        },
+      },
+    });
+
     this.children.chats = [];
 
     if (this.props?.chats) {
       Object.entries(this.props.chats).map(([key, chat]: [string, any]) => {
         this.children.chats.push(
           new Chat({
-            userAvatar: this.props?.avatar ? this.props.avatar : 'https://via.placeholder.com/150',
-            userName: 'chat.last_message.user.first_name',
-            message: 'chat.last_message.content',
+            userAvatar: chat.avatar ? chat.avatar : 'https://via.placeholder.com/150',
+            userName: chat.title,
+            message: chat.last_message ? chat.last_message : 'no messages yet',
             time: '10:20',
             messagesCount: chat.unread_count,
+            id: chat.id,
+            deleteChatBtn: new Button({
+              text: 'Delete',
+              class: 'chat__delete',
+              events: {
+                click: async () => {
+                  const { id } = chat;
+
+                  const data = {
+                    chatId: id,
+                  };
+
+                  await ChatsController.deleteChat(data);
+                },
+              },
+            }),
           }),
         );
       });
@@ -84,7 +102,6 @@ export class Chats extends Block<ChatsProps> {
   }
 
   render(): DocumentFragment {
-    console.log(this.props);
     return this.compile(template, { ...this.props });
   }
 }

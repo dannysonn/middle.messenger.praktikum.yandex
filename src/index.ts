@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   initInputsListEvents();
 
-  await ChatsController.getChats();
+  if (document.querySelector('.messages')) {
+    await ChatsController.getChats();
+  }
   await AuthController.getUser();
 });

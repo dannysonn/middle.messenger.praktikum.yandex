@@ -18,6 +18,10 @@ class ChatsApi {
   public deleteUserFromChat(data: any) {
     return ChatsApi.chatAPIInstance.delete('/chats/users', data);
   }
+
+  public deleteChat(data: any) {
+    return ChatsApi.chatAPIInstance.delete('/chats', data);
+  }
 }
 
 export default ChatsApi;
