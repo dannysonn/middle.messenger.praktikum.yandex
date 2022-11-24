@@ -3,9 +3,17 @@
         <img class="user-avatar" src="{{{userAvatar}}}" alt="user-avatar">
     </div>
     <div class="chat__item">
-        <span class="user-name">{{{userName}}}</span>
+        <span class="user-name">Title: {{{userName}}}</span>
         <br>
         <div class="user-message">{{{message}}}</div>
+        <form>
+            <input type="text" placeholder="user id">
+            {{{addUserBtn}}}
+        </form>
+        <form>
+            <input type="text" placeholder="user id">
+            {{{deleteUserBtn}}}
+        </form>
     </div>
     <div class="chat__item">
         <div class="chat__info">

@@ -27,7 +27,7 @@ export class Chats extends Block<ChatsProps> {
 
   protected initChildren() {
     this.children.button = new Button({
-      text: '&#10148;',
+      text: 'send',
       class: 'messages__send-btn',
       events: {
         click: () => {
@@ -80,6 +80,14 @@ export class Chats extends Block<ChatsProps> {
             time: '10:20',
             messagesCount: chat.unread_count,
             id: chat.id,
+            events: {
+              click: async () => {
+                const userId = store.getState().user.id;
+                const chatId = chat.id;
+
+                await ChatsController.connectToChat(userId, chatId);
+              },
+            },
             deleteChatBtn: new Button({
               text: 'Delete',
               class: 'chat__delete',
@@ -92,6 +100,36 @@ export class Chats extends Block<ChatsProps> {
                   };
 
                   await ChatsController.deleteChat(data);
+                },
+              },
+            }),
+            addUserBtn: new Button({
+              class: '',
+              text: 'add user',
+              type: 'submit',
+              events: {
+                click: async (e) => {
+                  e.preventDefault();
+
+                  const chatId = chat.id;
+                  const userId = e.currentTarget.previousElementSibling.value;
+
+                  await ChatsController.addUserToChat(userId, chatId);
+                },
+              },
+            }),
+            deleteUserBtn: new Button({
+              class: '',
+              text: 'delete user',
+              type: 'submit',
+              events: {
+                click: async (e) => {
+                  e.preventDefault();
+
+                  const chatId = chat.id;
+                  const userId = e.currentTarget.previousElementSibling.value;
+
+                  await ChatsController.deleteUserFromChat(userId, chatId);
                 },
               },
             }),

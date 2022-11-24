@@ -5,8 +5,9 @@ import Form from '../../components/form/form';
 import Input from '../../components/input/input';
 import { validateForm } from '../../utils/validateForm';
 import AuthController from '../../controllers/AuthController';
-import {router} from "../../index";
-import {store} from "../../utils/Store";
+import { router } from '../../index';
+import { store } from '../../utils/Store';
+import ChatsController from '../../controllers/ChatsController';
 
 const inputs = [
   new Input({
@@ -89,6 +90,9 @@ export class Registration extends Block<RegistrationProps> {
             AuthController.getUser();
 
             localStorage.setItem('currentPassword', `${data.password}`);
+
+            ChatsController.getChats();
+
             router.go('/chats');
           });
         },

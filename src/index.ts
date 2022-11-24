@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import ProfileChangeData from './pages/ProfileChangeData';
 import ProfileChangePassword from './pages/ProfileChangePassword';
 import ChatsController from './controllers/ChatsController';
+import { store } from './utils/Store';
 
 export const router = new Router('root');
 
@@ -23,8 +24,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   initInputsListEvents();
 
-  if (document.querySelector('.messages')) {
+  const isChatsPage = document.querySelector('.messages');
+  const isAuthPage = document.querySelector('.authorization');
+
+  await AuthController.getUser();
+  if (isChatsPage || isAuthPage) {
     await ChatsController.getChats();
   }
-  await AuthController.getUser();
+  console.log(store.getState());
 });

@@ -22,6 +22,10 @@ class ChatsApi {
   public deleteChat(data: any) {
     return ChatsApi.chatAPIInstance.delete('/chats', data);
   }
+
+  public connectToChat(chatId: any) {
+    return ChatsApi.chatAPIInstance.post(`/chats/token/${chatId}`);
+  }
 }
 
 export default ChatsApi;

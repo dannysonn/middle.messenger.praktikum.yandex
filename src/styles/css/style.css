@@ -162,6 +162,9 @@ body::-webkit-scrollbar {
   display: flex;
   list-style: none;
 }
+.chat:hover {
+  background: #f2f2f2;
+}
 .chat__item {
   margin-top: 10px;
 }
