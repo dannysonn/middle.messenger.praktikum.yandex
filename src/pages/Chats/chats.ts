@@ -30,8 +30,17 @@ export class Chats extends Block<ChatsProps> {
       text: 'send',
       class: 'messages__send-btn',
       events: {
-        click: () => {
+        click: (e) => {
+          e.preventDefault();
+
           validateForm();
+
+          const message = e.currentTarget.previousElementSibling.value;
+
+          ChatsController.socket?.send(JSON.stringify({
+            content: `${message}`,
+            type: 'message',
+          }));
         },
       },
     });
@@ -76,12 +85,14 @@ export class Chats extends Block<ChatsProps> {
           new Chat({
             userAvatar: chat.avatar ? chat.avatar : 'https://via.placeholder.com/150',
             userName: chat.title,
-            message: chat.last_message ? chat.last_message : 'no messages yet',
+            message: chat.last_message.content ? chat.last_message.content : 'no messages yet',
             time: '10:20',
             messagesCount: chat.unread_count,
             id: chat.id,
             events: {
               click: async () => {
+                document.querySelector('.messages__footer').style = 'display: flex;';
+
                 const userId = store.getState().user.id;
                 const chatId = chat.id;
 

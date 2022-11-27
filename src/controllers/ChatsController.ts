@@ -4,26 +4,32 @@ import { store, StoreEvents } from '../utils/Store';
 class ChatsController {
   api: any;
 
+  socket: WebSocket | null;
+
   constructor() {
     this.api = new ChatsApi();
+    this.socket = null;
   }
 
   async getChats() {
-    await this.api.getChats().then((data: any) => {
-      store.set('chats', data);
-    });
+    await this.api.getChats()
+      .then((data: any) => {
+        store.set('chats', data);
+      });
   }
 
   async createChat(data: any) {
-    await this.api.createChat(data).then(() => {
-      store.set('chats', this.getChats());
-    });
+    await this.api.createChat(data)
+      .then(() => {
+        store.set('chats', this.getChats());
+      });
   }
 
   async deleteChat(data: any) {
-    await this.api.deleteChat(data).then(() => {
-      store.set('chats', this.getChats());
-    });
+    await this.api.deleteChat(data)
+      .then(() => {
+        store.set('chats', this.getChats());
+      });
   }
 
   async addUserToChat(userId: any, chatId: string) {
@@ -46,20 +52,33 @@ class ChatsController {
   async connectToChat(userId: any, chatId: any) {
     await this.api.connectToChat(chatId)
       .then((data: any) => {
+        const chatContent = document.querySelector('.messages__content');
+        chatContent.innerHTML = '';
+
+        if (this.socket) {
+          this.socket.close();
+        }
+
         const { token } = data;
 
-        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
+        this.socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
 
-        socket.addEventListener('open', () => {
+        this.socket.addEventListener('open', () => {
           console.log('Соединение установлено');
 
-          socket.send(JSON.stringify({
-            content: 'Hello world!',
-            type: 'message',
+          this.socket?.send(JSON.stringify({
+            content: '0',
+            type: 'get old',
           }));
+
+          setInterval(() => {
+            this.socket?.send(JSON.stringify({
+              type: 'ping',
+            }));
+          }, 3000);
         });
 
-        socket.addEventListener('close', (event) => {
+        this.socket.addEventListener('close', (event) => {
           if (event.wasClean) {
             console.log('Соединение закрыто чисто');
           } else {
@@ -69,12 +88,62 @@ class ChatsController {
           console.log(`Код: ${event.code} | Причина: ${event.reason}`);
         });
 
-        socket.addEventListener('message', (event) => {
-          console.log('Получены данные', event.data);
-          document.querySelector('.messages__content')?.append(`<span>${event.data.content}</span>`);
+        this.socket.addEventListener('message', (event) => {
+          const data = JSON.parse(event.data);
+          console.log('Получены данные', data);
+
+          if (data.type === 'pong') {
+
+          } else if (Array.isArray(data)) {
+            data.forEach((item) => {
+              const messageElem = document.createElement('div');
+
+              if (item.user_id === store.getState().user.id) {
+                messageElem.innerHTML = `
+                    <div class="messages__mine-container">
+                        <div class="messages__mine">
+                            ${item.content}
+                        </div>
+                    </div>
+                `;
+              } else {
+                messageElem.innerHTML = `
+                <div class="messages__friend-container">
+                        <div class="messages__friend">
+                            ${item.content}
+                        </div>
+                    </div>`;
+              }
+
+              document.querySelector('.messages__content')
+                ?.prepend(messageElem);
+            });
+          } else {
+            const messageElem = document.createElement('div');
+
+            if (data.user_id === store.getState().user.id) {
+              messageElem.innerHTML = `
+                    <div class="messages__mine-container">
+                        <div class="messages__mine">
+                            ${data.content}
+                        </div>
+                    </div>
+                `;
+            } else {
+              messageElem.innerHTML = `
+                <div class="messages__friend-container">
+                        <div class="messages__friend">
+                            ${data.content}
+                        </div>
+                    </div>`;
+            }
+
+            document.querySelector('.messages__content')
+              ?.append(messageElem);
+          }
         });
 
-        socket.addEventListener('error', (event) => {
+        this.socket.addEventListener('error', (event) => {
           console.log('Ошибка', event.message);
         });
       });

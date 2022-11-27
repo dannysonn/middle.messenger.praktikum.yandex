@@ -246,6 +246,7 @@ body {
     color: #1e1e1e;
     margin-left: auto;
     margin-right: 20px;
+    margin-bottom: 10px;
     padding: 11px;
     background: #e4edfd;
     border-radius: 10px;
@@ -262,7 +263,7 @@ body {
   &__footer {
     width: 75vw;
     height: 10vh;
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
     position: fixed;
@@ -293,7 +294,6 @@ body {
   }
 
   &__send-btn {
-    width: 35px;
     height: 35px;
     color: #fff;
     background-color: #4e54c8;
