@@ -1,7 +1,7 @@
 # Messanger project
 This is my little study project, to learn how framework works inside 
 
-Current stack: Parcel, Handlebars, JavaScript, SCSS, Express + Node.js, TypeScript, ESLint, Stylelint
+Current stack: Parcel, Handlebars, JavaScript, SCSS, Express + Node.js, TypeScript, ESLint, Stylelint, Routing, WebSocket
 
 Figma link [here](https://www.figma.com/file/vhdI8BVGn279kYa3bMS54K/Messanger?node-id=0%3A1)
 
