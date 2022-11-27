@@ -10,16 +10,16 @@ import ProfileChangePassword from './pages/ProfileChangePassword';
 import ChatsController from './controllers/ChatsController';
 import { store } from './utils/Store';
 
-export const router = new Router('root');
+export const router = new Router('#root');
 
 document.addEventListener('DOMContentLoaded', async () => {
   router
-    .use('/', Login, {})
-    .use('/chats', Chats, {})
-    .use('/registration', Registration, {})
-    .use('/profile', Profile, {})
-    .use('/profileChangeData', ProfileChangeData, {})
-    .use('/profileChangePassword', ProfileChangePassword, {})
+    .use('/', Login)
+    .use('/chats', Chats)
+    .use('/registration', Registration)
+    .use('/profile', Profile)
+    .use('/profileChangeData', ProfileChangeData)
+    .use('/profileChangePassword', ProfileChangePassword)
     .start();
 
   initInputsListEvents();

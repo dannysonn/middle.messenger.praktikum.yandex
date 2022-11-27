@@ -85,7 +85,7 @@ export class Chats extends Block<ChatsProps> {
           new Chat({
             userAvatar: chat.avatar ? chat.avatar : 'https://via.placeholder.com/150',
             userName: chat.title,
-            message: chat.last_message.content ? chat.last_message.content : 'no messages yet',
+            message: 'no messages yet',
             time: '10:20',
             messagesCount: chat.unread_count,
             id: chat.id,

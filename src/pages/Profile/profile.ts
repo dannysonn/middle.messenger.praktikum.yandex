@@ -10,6 +10,7 @@ import UserAvatar from '../../components/userAvatar/userAvatar';
 import UserController from '../../controllers/UserController';
 import UserAvatarForm from '../../components/userAvatarForm/userAvatarForm';
 import {store, StoreEvents} from "../../utils/Store";
+import ChatsController from "../../controllers/ChatsController";
 
 interface ProfileProps {
   buttons: Button[],
@@ -94,7 +95,7 @@ export class Profile extends Block<ProfileProps> {
         text: 'Change data',
         events: {
           click: () => {
-            const router = new Router();
+            const router = new Router('#root');
             router.go('/profileChangeData');
 
             initInputsListEvents();
@@ -131,9 +132,10 @@ export class Profile extends Block<ProfileProps> {
       text: '',
       class: 'profile__btn',
       events: {
-        click: () => {
-          const router = new Router();
+        click: async () => {
+          const router = new Router('#root');
           router.go('/chats');
+          await ChatsController.getChats();
         },
       },
     });

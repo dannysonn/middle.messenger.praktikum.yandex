@@ -1,9 +1,8 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
 import { isEqual } from './isEqual';
-import {render} from "./render";
 
-export default class Block<Props extends {}> {
+export default class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -129,7 +128,7 @@ export default class Block<Props extends {}> {
     return new DocumentFragment();
   }
 
-  public getContent(): HTMLElement | null {
+  public getContent(): HTMLElement {
     return this.element;
   }
 
