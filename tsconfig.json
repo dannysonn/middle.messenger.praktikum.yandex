@@ -8,8 +8,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "esModuleInterop": true,
   },
+
+  "include": ["src/**/*.spec.ts"],
 
   "exclude": [
     "node_modules"

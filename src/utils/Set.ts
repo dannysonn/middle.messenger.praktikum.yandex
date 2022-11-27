@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Indexed } from './Store';
 import { merge } from './Merge';
 
@@ -13,6 +14,7 @@ export function set(
   if (typeof path !== 'string') {
     throw new Error('path must be string');
   }
+  // @ts-ignore
   if (path === 'localChat' && value.type !== 'message') {
     object.localChat = {};
   }

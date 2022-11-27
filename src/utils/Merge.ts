@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Indexed } from './Store';
 
 export function merge(lhs: Indexed, rhs: Indexed): Indexed {
