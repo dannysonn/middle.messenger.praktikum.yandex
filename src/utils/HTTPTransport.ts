@@ -1,62 +1,72 @@
-enum METHODS {
+import { queryStringify } from './queryStringify';
+import { router } from '../index';
+
+enum Methods {
   GET = 'GET',
   PUT = 'PUT',
   POST = 'POST',
   DELETE = 'DELETE',
 }
 
-/**
- * Функцию реализовывать здесь необязательно, но может помочь не плодить логику у GET-метода
- * На входе: объект. Пример: {a: 1, b: 2, c: {d: 123}, k: [1, 2, 3]}
- * На выходе: строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
- */
-function queryStringify(data: any) {
-  // Можно делать трансформацию GET-параметров в отдельной функции
-  return `?${Object.keys(data).map((key) => `${key}=${data[key]}`).join('&')}`;
-}
+export default class HTTPTransport {
+  static baseUrl: string;
 
-class HTTPTransport {
-  get = (url: string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  constructor() {
+    HTTPTransport.baseUrl = 'https://ya-praktikum.tech/api/v2';
+  }
 
-  put = (url: string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  get = (url: string) => this.request(`${HTTPTransport.baseUrl}${url}`, Methods.GET);
 
-  post = (url: string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  put = (url: string, data?: any, headers?: Record<string, string>) => this.request(`${HTTPTransport.baseUrl}${url}`, Methods.PUT, data, headers);
 
-  delete = (url: string, options = {}) => this.request(url, { ...options, method: METHODS.GET });
+  post = (url: string, data?: any, headers?: Record<string, string>) => this.request(`${HTTPTransport.baseUrl}${url}`, Methods.POST, data, headers);
 
-  // PUT, POST, DELETE
+  delete = (url: string, data?: any, headers?: Record<string, string>) => this.request(`${HTTPTransport.baseUrl}${url}`, Methods.DELETE, data, headers);
 
-  // options:
-  // headers — obj
-  // data — obj
-  request = (url: string, options: any, timeout = 5000) => {
-    const { method, data, headers } : { method: string, data: any, headers: Record<string, string> } = options;
+  request = (url: string, method: Methods, data?: any, headers?: Record<string, string>, timeout = 5000) => new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    const newUrl = (method === Methods.GET && data) ? `${url}${queryStringify(data)}` : url;
 
-    return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      const newUrl = (method === METHODS.GET && data) ? `${url}${queryStringify(data)}` : url;
+    xhr.open(method, newUrl, true);
 
-      xhr.open(method, newUrl, true);
+    if (headers) {
+      Object.entries(headers).forEach(([key, value]) => xhr.setRequestHeader(key, value));
+    }
 
-      if (headers) {
-        Object.entries(headers).forEach(([key, value]) => xhr.setRequestHeader(key, value));
-      }
+    xhr.timeout = timeout;
 
-      xhr.timeout = timeout;
-
-      xhr.onload = () => {
-        resolve(xhr);
-      };
-
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
-
-      if (method === METHODS.GET || !data) {
-        xhr.send();
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        resolve(xhr.response);
       } else {
-        xhr.send(JSON.stringify(data));
+        alert(xhr.response.reason);
+
+        if (xhr.response.reason === 'User already in system') {
+          router.go('/chats');
+        }
+        reject(xhr.response);
+
+        throw new Error(xhr.response);
       }
-    });
-  };
+    };
+
+    xhr.onabort = () => reject({ reason: 'abort' });
+    xhr.onerror = () => reject({ reason: 'error' });
+    xhr.ontimeout = () => reject({ reason: 'timeout' });
+
+    if (!headers) {
+      xhr.setRequestHeader('Content-type', 'application/json');
+    }
+
+    xhr.withCredentials = true;
+    xhr.responseType = 'json';
+
+    if (method === Methods.GET || !data) {
+      xhr.send();
+    } else if (headers) {
+      xhr.send(data);
+    } else {
+      xhr.send(JSON.stringify(data));
+    }
+  });
 }

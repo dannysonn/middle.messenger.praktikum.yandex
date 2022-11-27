@@ -6,9 +6,10 @@ interface ButtonProps {
   class: string,
   formId?: string,
   events?: any,
+  type?: any,
 }
 
-export default class Button extends Block {
+export default class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
     super(props);
   }

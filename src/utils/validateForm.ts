@@ -1,30 +1,32 @@
-export let validateForm = () => {
-    let isValid: boolean = true;
-    let inputs = document.querySelectorAll('input');
+// eslint-disable-next-line import/prefer-default-export
+export const validateForm = () => {
+  let isValid: boolean = true;
+  const inputs = document.querySelectorAll('input');
 
-    inputs.forEach((input) => {
-        if (input.classList.contains('invalid')) {
-            isValid = false;
-        }
-    });
-
-    if (isValid) {
-        console.log(getFormObject());
-    } else {
-        throw new Error('Form validation error');
+  inputs.forEach((input) => {
+    if (input.classList.contains('invalid')) {
+      isValid = false;
     }
-}
+  });
+
+  if (isValid) {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    return getFormObject();
+  }
+  alert('invalid form');
+  throw new Error('Form validation error');
+};
 
 let getFormObject = () => {
-    let inputs = document.querySelectorAll('input');
-    let resultObject = {};
+  const inputs = document.querySelectorAll('input');
+  const resultObject: any = {};
 
-    inputs.forEach(input => {
-        let key: string | null = input.getAttribute('type');
-        let value: string = input.value;
+  inputs.forEach((input) => {
+    const key: string | null = input.getAttribute('name');
+    const { value } = input;
 
-        resultObject[`${key}`] = value;
-    });
+    resultObject[`${key}`] = value;
+  });
 
-    return resultObject;
-}
+  return resultObject;
+};
