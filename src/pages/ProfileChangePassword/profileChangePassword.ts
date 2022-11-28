@@ -6,7 +6,6 @@ import Input from '../../components/input/input';
 import Router from '../../utils/Router';
 import { validateForm } from '../../utils/validateForm';
 import UserController from '../../controllers/UserController';
-import { store } from '../../utils/Store';
 
 interface ProfileProps {
   buttons: Button[],

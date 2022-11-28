@@ -6,6 +6,7 @@ import { validateForm } from '../../utils/validateForm';
 import Router from '../../utils/Router';
 import ChatsController from '../../controllers/ChatsController';
 import { store, StoreEvents } from '../../utils/Store';
+import {initInputsListEvents} from "../../utils/initInputsList";
 
 interface ChatsProps {
   button: Button;
@@ -92,6 +93,7 @@ export class Chats extends Block<ChatsProps> {
             events: {
               click: async () => {
                 document.querySelector('.messages__footer').style = 'display: flex;';
+                initInputsListEvents();
 
                 const userId = store.getState().user.id;
                 const chatId = chat.id;

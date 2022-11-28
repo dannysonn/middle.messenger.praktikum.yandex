@@ -6,8 +6,8 @@ import Input from '../../components/input/input';
 import { validateForm } from '../../utils/validateForm';
 import AuthController from '../../controllers/AuthController';
 import { router } from '../../index';
-import { store } from '../../utils/Store';
 import ChatsController from '../../controllers/ChatsController';
+import {initInputsListEvents} from "../../utils/initInputsList";
 
 const inputs = [
   new Input({
@@ -115,6 +115,7 @@ export class Registration extends Block<RegistrationProps> {
       events: {
         click: () => {
           router.go('/');
+          initInputsListEvents();
         },
       },
     });
