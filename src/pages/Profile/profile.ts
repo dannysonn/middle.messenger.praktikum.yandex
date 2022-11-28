@@ -6,7 +6,6 @@ import { initInputsListEvents } from '../../utils/initInputsList';
 import AuthController from '../../controllers/AuthController';
 import Input from '../../components/input/input';
 import Router from '../../utils/Router';
-import UserAvatar from '../../components/userAvatar/userAvatar';
 import UserController from '../../controllers/UserController';
 import UserAvatarForm from '../../components/userAvatarForm/userAvatarForm';
 import {store, StoreEvents} from "../../utils/Store";

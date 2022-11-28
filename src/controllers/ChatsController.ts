@@ -1,5 +1,5 @@
-import ChatsApi from '../api/ChatsApi';
-import { store, StoreEvents } from '../utils/Store';
+import ChatsApi, {CreateChatData, DeleteChatData} from '../api/ChatsApi';
+import { store } from '../utils/Store';
 
 class ChatsController {
   api: any;
@@ -18,21 +18,21 @@ class ChatsController {
       });
   }
 
-  async createChat(data: any) {
+  async createChat(data: CreateChatData) {
     await this.api.createChat(data)
       .then(() => {
         store.set('chats', this.getChats());
       });
   }
 
-  async deleteChat(data: any) {
+  async deleteChat(data: DeleteChatData) {
     await this.api.deleteChat(data)
       .then(() => {
         store.set('chats', this.getChats());
       });
   }
 
-  async addUserToChat(userId: any, chatId: string) {
+  async addUserToChat(userId: number, chatId: number) {
     const data = {
       users: [userId],
       chatId,
@@ -49,7 +49,7 @@ class ChatsController {
     await this.api.deleteUserFromChat(data);
   }
 
-  async connectToChat(userId: any, chatId: any) {
+  async connectToChat(userId: number, chatId: number) {
     await this.api.connectToChat(chatId)
       .then((data: any) => {
         const chatContent = document.querySelector('.messages__content');

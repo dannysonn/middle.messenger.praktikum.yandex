@@ -1,4 +1,4 @@
-import AuthApi from '../api/AuthApi';
+import AuthApi, {SignInData, SignUpData} from '../api/AuthApi';
 import { router } from '../index';
 import { store } from '../utils/Store';
 
@@ -13,14 +13,20 @@ class AuthController {
     await this.api.getUser()
       .then((data: any) => {
         store.set('user', data);
+
+        const isAuthPage = document.querySelector('.authorization');
+
+        if (isAuthPage) {
+          router.go('/chats');
+        }
       });
   }
 
-  async signIn(data: any) {
+  async signIn(data: SignInData) {
     await this.api.signIn(data);
   }
 
-  async signUp(data: any) {
+  async signUp(data: SignUpData) {
     await this.api.signUp(data);
 
     router.go('/chats');
