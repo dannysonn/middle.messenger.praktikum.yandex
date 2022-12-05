@@ -1,5 +1,12 @@
 @import "../variables";
 
+body {
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
 .chats-sidebar {
   height: 100%;
   width: 25vw;
@@ -8,10 +15,19 @@
   position: fixed;
   top: 0;
   left: 0;
+
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
 .chats-header {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   flex-wrap: wrap;
   background: #4e54c8; /* fallback for old browsers */
   background: linear-gradient(to right, #4e54c8, #8f94fb); /* Chrome 10-25, Safari 5.1-6 */
@@ -19,26 +35,37 @@
   height: 100px;
   color: #4e54c8;
 
+  &__btn {
+    width: 40%;
+    background: black;
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+  }
+
   &__search {
-    width: 90%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     height: 32px;
     margin: 0 auto;
     border-radius: 5px;
-    background: #fff;
+    margin-bottom: 15px;
   }
 
   &__input {
-    width: 100%;
+    width: 40%;
     height: 100%;
     align-self: center;
     font-size: 14px;
     line-height: 12px;
     border: none;
-    background: none;
+    background: #fff;
     padding-left: 1vw;
 
     &::placeholder {
-      color: #4e54c8;
+      color: black;
     }
 
     &:focus {
@@ -53,6 +80,9 @@
     line-height: 12px;
     text-decoration: none;
     margin: 23px 10px 0 auto;
+    border: none;
+    background: none;
+    cursor: pointer;
   }
 }
 
@@ -66,9 +96,13 @@
   padding-top: 12px;
   padding-bottom: 12px;
   width: 100%;
-  max-height: 70px;
+  min-height: 70px;
   display: flex;
   list-style: none;
+
+  &:hover {
+    background: #f2f2f2;
+  }
 
   &__item {
     margin-top: 10px;
@@ -124,6 +158,14 @@
     line-height: 13px;
     color: #999;
   }
+
+  &__delete {
+    color: red;
+    background: none;
+    border: none;
+
+    cursor: pointer;
+  }
 }
 
 .messages {
@@ -137,15 +179,13 @@
     flex-direction: column;
     justify-content: end;
     width: 75vw;
-    height: 100vh;
-    position: fixed;
-    bottom: 0;
-    margin-bottom: 80px;
+    margin-bottom: 15vh;
+    margin-top: 10vh;
   }
 
   &__header {
     width: 75vw;
-    height: 70px;
+    height: 10vh;
     display: flex;
     justify-content: space-between;
     position: fixed;
@@ -206,6 +246,7 @@
     color: #1e1e1e;
     margin-left: auto;
     margin-right: 20px;
+    margin-bottom: 10px;
     padding: 11px;
     background: #e4edfd;
     border-radius: 10px;
@@ -221,14 +262,17 @@
 
   &__footer {
     width: 75vw;
-    height: 70px;
-    display: flex;
+    height: 10vh;
+    display: none;
     justify-content: space-between;
     align-items: center;
     position: fixed;
     bottom: 0;
     z-index: 1000;
     margin: 20px 0 0;
+
+    border-top: 1px solid black;
+    background: white;
   }
 
   #addFile {
@@ -250,7 +294,6 @@
   }
 
   &__send-btn {
-    width: 35px;
     height: 35px;
     color: #fff;
     background-color: #4e54c8;
