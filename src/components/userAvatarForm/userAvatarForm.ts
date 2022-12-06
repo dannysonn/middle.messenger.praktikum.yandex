@@ -1,22 +1,18 @@
 import Block from '../../utils/Block';
 import template from './userAvatarForm.hbs';
-import UserAvatar from '../userAvatar/userAvatar';
+
+interface UserAvatarFormProps {
+  avatar: string;
+  events: any;
+}
 
 export default class UserAvatarForm extends Block {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-  constructor(props: any) {
+  constructor(props: UserAvatarFormProps) {
     super(props);
   }
 
-  protected initChildren() {
-    this.children.avatar = new UserAvatar({
-      class: 'profile__avatar',
-      userAvatar: `https://ya-praktikum.tech/api/v2/resources${this.props?.avatar}`,
-      alt: 'profile avatar',
-    });
-  }
-
   render(): DocumentFragment {
-    return this.compile(template, { ...this.props });
+    return this.compile(template, { userAvatar: this.props?.avatar, ...this.props });
   }
 }

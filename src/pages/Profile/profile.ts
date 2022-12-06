@@ -14,6 +14,7 @@ import ChatsController from '../../controllers/ChatsController';
 interface ProfileProps {
   buttons: Button[],
   form: Form,
+  userAvatarForm: UserAvatarForm,
   profileBtn: Button,
 }
 
@@ -27,6 +28,24 @@ export class Profile extends Block {
   }
 
   protected initChildren() {
+    this.children.userAvatarForm = new UserAvatarForm({
+      avatar: `https://ya-praktikum.tech/api/v2/resources${this.props?.avatar}`,
+      events: {
+        submit: async (e) => {
+          e.preventDefault();
+
+          const inputFile = document.getElementById('avatar');
+
+          const formData = new FormData();
+
+          // @ts-ignore
+          formData.append('avatar', inputFile?.files[0]);
+
+          await UserController.changeUserAvatar(formData);
+        },
+      },
+    });
+
     this.children.form = new Form({
       formId: 'profileForm',
       inputs: [
@@ -136,24 +155,6 @@ export class Profile extends Block {
           const router = new Router('#root');
           router.go('/chats');
           await ChatsController.getChats();
-        },
-      },
-    });
-
-    this.children.userAvatar = new UserAvatarForm({
-      avatar: this.props?.avatar,
-      events: {
-        submit: async (e) => {
-          e.preventDefault();
-
-          const inputFile = document.getElementById('avatar');
-
-          const formData = new FormData();
-
-          // @ts-ignore
-          formData.append('avatar', inputFile?.files[0]);
-
-          await UserController.changeUserAvatar(formData);
         },
       },
     });

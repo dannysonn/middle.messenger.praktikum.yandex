@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const isAuthPage = document.querySelector('.authorization');
 
   await AuthController.getUser();
-  if (isChatsPage || isAuthPage) {
-    await ChatsController.getChats();
-  }
+  await ChatsController.getChats();
+
   console.log(store.getState());
 });

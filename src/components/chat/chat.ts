@@ -7,7 +7,10 @@ interface ChatProps {
   userName: string;
   message: string;
   time: string;
+  events: any;
   messagesCount: string;
+  addUserBtn: Button;
+  deleteUserBtn: Button;
   deleteChatBtn: Button;
   id: string;
 }
