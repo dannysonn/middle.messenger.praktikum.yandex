@@ -8,8 +8,8 @@ import Input from '../../components/input/input';
 import Router from '../../utils/Router';
 import UserController from '../../controllers/UserController';
 import UserAvatarForm from '../../components/userAvatarForm/userAvatarForm';
-import {store, StoreEvents} from "../../utils/Store";
-import ChatsController from "../../controllers/ChatsController";
+import { store, StoreEvents } from '../../utils/Store';
+import ChatsController from '../../controllers/ChatsController';
 
 interface ProfileProps {
   buttons: Button[],
@@ -17,7 +17,7 @@ interface ProfileProps {
   profileBtn: Button,
 }
 
-export class Profile extends Block<ProfileProps> {
+export class Profile extends Block {
   constructor(props: ProfileProps) {
     super(props);
 
@@ -88,6 +88,7 @@ export class Profile extends Block<ProfileProps> {
       ],
     });
 
+    // @ts-ignore
     this.children.buttons = [
       new Button({
         class: 'profile__footer-item',
@@ -106,7 +107,7 @@ export class Profile extends Block<ProfileProps> {
         text: 'Change password',
         events: {
           click: () => {
-            const router = new Router();
+            const router = new Router('#root');
             router.go('/profileChangePassword');
 
             initInputsListEvents();
@@ -120,7 +121,7 @@ export class Profile extends Block<ProfileProps> {
           click: () => {
             AuthController.logout();
 
-            const router = new Router();
+            const router = new Router('#root');
             router.go('/');
           },
         },
@@ -149,6 +150,7 @@ export class Profile extends Block<ProfileProps> {
 
           const formData = new FormData();
 
+          // @ts-ignore
           formData.append('avatar', inputFile?.files[0]);
 
           await UserController.changeUserAvatar(formData);

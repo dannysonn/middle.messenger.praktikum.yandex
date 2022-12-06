@@ -7,7 +7,7 @@ import { validateForm } from '../../utils/validateForm';
 import AuthController from '../../controllers/AuthController';
 import { router } from '../../index';
 import ChatsController from '../../controllers/ChatsController';
-import {initInputsListEvents} from "../../utils/initInputsList";
+import { initInputsListEvents } from '../../utils/initInputsList';
 
 const inputs = [
   new Input({
@@ -72,7 +72,7 @@ interface RegistrationProps {
   signInBtn: Button
 }
 
-export class Registration extends Block<RegistrationProps> {
+export class Registration extends Block {
   constructor(props: RegistrationProps) {
     super(props);
   }

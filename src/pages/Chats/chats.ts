@@ -6,7 +6,7 @@ import { validateForm } from '../../utils/validateForm';
 import Router from '../../utils/Router';
 import ChatsController from '../../controllers/ChatsController';
 import { store, StoreEvents } from '../../utils/Store';
-import {initInputsListEvents} from "../../utils/initInputsList";
+import { initInputsListEvents } from '../../utils/initInputsList';
 
 interface ChatsProps {
   button: Button;
@@ -15,8 +15,9 @@ interface ChatsProps {
   events?: any;
 }
 
-export class Chats extends Block<ChatsProps> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
+export class Chats extends Block {
+  children: any;
+
   constructor(props: ChatsProps) {
     super(props);
 
@@ -51,7 +52,7 @@ export class Chats extends Block<ChatsProps> {
       class: 'chats-header__profile-link',
       events: {
         click: () => {
-          const router = new Router();
+          const router = new Router('#root');
 
           router.go('/profile');
         },
@@ -66,6 +67,7 @@ export class Chats extends Block<ChatsProps> {
         click: async (e: Event) => {
           e.preventDefault();
 
+          // @ts-ignore
           let title = document.getElementById('new-chat')?.value;
           const data = {
             title,
@@ -78,78 +80,79 @@ export class Chats extends Block<ChatsProps> {
       },
     });
 
-    this.children.chats = [];
-
-    if (this.props?.chats) {
-      Object.entries(this.props.chats).map(([key, chat]: [string, any]) => {
-        this.children.chats.push(
-          new Chat({
-            userAvatar: chat.avatar ? chat.avatar : 'https://via.placeholder.com/150',
-            userName: chat.title,
-            message: 'no messages yet',
-            time: '10:20',
-            messagesCount: chat.unread_count,
-            id: chat.id,
-            events: {
-              click: async () => {
-                document.querySelector('.messages__footer').style = 'display: flex;';
-                initInputsListEvents();
-
-                const userId = store.getState().user.id;
-                const chatId = chat.id;
-
-                await ChatsController.connectToChat(userId, chatId);
-              },
-            },
-            deleteChatBtn: new Button({
-              text: 'Delete',
-              class: 'chat__delete',
-              events: {
-                click: async () => {
-                  const { id } = chat;
-
-                  const data = {
-                    chatId: id,
-                  };
-
-                  await ChatsController.deleteChat(data);
-                },
-              },
-            }),
-            addUserBtn: new Button({
-              class: '',
-              text: 'add user',
-              type: 'submit',
-              events: {
-                click: async (e) => {
-                  e.preventDefault();
-
-                  const chatId = chat.id;
-                  const userId = e.currentTarget.previousElementSibling.value;
-
-                  await ChatsController.addUserToChat(userId, chatId);
-                },
-              },
-            }),
-            deleteUserBtn: new Button({
-              class: '',
-              text: 'delete user',
-              type: 'submit',
-              events: {
-                click: async (e) => {
-                  e.preventDefault();
-
-                  const chatId = chat.id;
-                  const userId = e.currentTarget.previousElementSibling.value;
-
-                  await ChatsController.deleteUserFromChat(userId, chatId);
-                },
-              },
-            }),
-          }),
-        );
-      });
-    }
+    // if (this.props?.chats) {
+    //   this.children.chats = [];
+    //
+    //   Object.entries(this.props.chats).map(([key, chat]: [string, any]) => {
+    //     this.children.chats.push(
+    //       new Chat({
+    //         userAvatar: chat.avatar ? chat.avatar : 'https://via.placeholder.com/150',
+    //         userName: chat.title,
+    //         message: 'no messages yet',
+    //         time: '10:20',
+    //         messagesCount: chat.unread_count,
+    //         id: chat.id,
+    //         events: {
+    //           click: async () => {
+    //             // @ts-ignore
+    //             document.querySelector('.messages__footer')!.style = 'display: flex;';
+    //             initInputsListEvents();
+    //
+    //             const userId = store.getState().user.id;
+    //             const chatId = chat.id;
+    //
+    //             await ChatsController.connectToChat(userId, chatId);
+    //           },
+    //         },
+    //         deleteChatBtn: new Button({
+    //           text: 'Delete',
+    //           class: 'chat__delete',
+    //           events: {
+    //             click: async () => {
+    //               const { id } = chat;
+    //
+    //               const data = {
+    //                 chatId: id,
+    //               };
+    //
+    //               await ChatsController.deleteChat(data);
+    //             },
+    //           },
+    //         }),
+    //         addUserBtn: new Button({
+    //           class: '',
+    //           text: 'add user',
+    //           type: 'submit',
+    //           events: {
+    //             click: async (e) => {
+    //               e.preventDefault();
+    //
+    //               const chatId = chat.id;
+    //               const userId = e.currentTarget.previousElementSibling.value;
+    //
+    //               await ChatsController.addUserToChat(userId, chatId);
+    //             },
+    //           },
+    //         }),
+    //         deleteUserBtn: new Button({
+    //           class: '',
+    //           text: 'delete user',
+    //           type: 'submit',
+    //           events: {
+    //             click: async (e) => {
+    //               e.preventDefault();
+    //
+    //               const chatId = chat.id;
+    //               const userId = e.currentTarget.previousElementSibling.value;
+    //
+    //               await ChatsController.deleteUserFromChat(userId, chatId);
+    //             },
+    //           },
+    //         }),
+    //       }),
+    //     );
+    //   });
+    // }
   }
 
   render(): DocumentFragment {

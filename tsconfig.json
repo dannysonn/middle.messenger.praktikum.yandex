@@ -1,19 +1,26 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "target": "es2017",
-    "declaration": false,
+    "importHelpers": true,
     "module": "commonjs",
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "moduleResolution": "node",
+    "target": "es2019",
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "alwaysStrict": true,
     "sourceMap": true,
     "strictNullChecks": true,
+    "lib": [
+      "es2019",
+      "dom",
+      "dom.iterable",
+    ],
     "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "baseUrl": "src/"
   },
-
-  "include": ["src/**/*.spec.ts"],
-
   "exclude": [
     "node_modules"
   ]

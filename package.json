@@ -1,5 +1,5 @@
 {
-  "name": "messanger",
+  "name": "my-webpack-project",
   "engines": {
     "node": ">= 12"
   },
@@ -12,12 +12,16 @@
   },
   "scripts": {
     "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html",
+    "build": "webpack --mode=production --node-env=production",
     "start": "npm run build && node src/server.js",
     "sass": "sass src/styles/sass/main.scss src/styles/css/style.css",
     "lint": "eslint . --fix",
     "stylelint": "stylelint './src/styles/sass/*' --fix",
-    "test": "mocha -r ts-node/register"
+    "test": "mocha -r ts-node/register",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
   },
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.9",
@@ -29,16 +33,29 @@
     "@types/mocha": "10.0.0",
     "@typescript-eslint/eslint-plugin": "5.41.0",
     "@typescript-eslint/parser": "5.41.0",
+    "@webpack-cli/generators": "^3.0.1",
     "chai": "4.3.7",
+    "css-loader": "^6.7.1",
     "eslint": "8.26.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-typescript": "17.0.0",
+    "handlebars-loader": "^1.7.2",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
     "mocha": "10.1.0",
     "parcel": "2.2.1",
+    "prettier": "^2.8.0",
+    "sass": "^1.56.1",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
     "stylelint": "14.14.0",
     "stylelint-config-standard-scss": "6.0.0",
+    "ts-loader": "^9.4.2",
     "ts-node": "10.5.0",
-    "typescript": "4.5.5"
+    "typescript": "^4.5.5",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.9.3"
   },
   "dependencies": {
     "express": "4.18.1",
@@ -46,5 +63,7 @@
     "nanoid": "^4.0.0",
     "stylelint-config-standard": "29.0.0",
     "stylelint-scss": "4.3.0"
-  }
+  },
+  "version": "1.0.0",
+  "description": "My webpack project"
 }

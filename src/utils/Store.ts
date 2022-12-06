@@ -3,7 +3,7 @@ import { isEqual } from './isEqual';
 import { set } from './Set';
 import Block from './Block';
 
-type Indexed<T = any> = {
+export type Indexed<T = any> = {
   [key in string]: T;
 };
 
@@ -30,7 +30,7 @@ export const withStore = (
   mapStateToProps: (state: Record<string, unknown>) => Record<string, unknown>,
 ) => (Component: typeof Block) => {
   let state: Record<string, unknown>;
-  return class extends Component<any> {
+  return class extends Component {
     constructor(props: any) {
       state = mapStateToProps(store.getState());
       super({ ...props, ...state });

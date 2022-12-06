@@ -9,6 +9,7 @@ import ProfileChangeData from './pages/ProfileChangeData';
 import ProfileChangePassword from './pages/ProfileChangePassword';
 import ChatsController from './controllers/ChatsController';
 import { store } from './utils/Store';
+import './styles/css/style.css';
 
 export const router = new Router('#root');
 

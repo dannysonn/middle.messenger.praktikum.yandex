@@ -2,7 +2,7 @@ import Block from '../../utils/Block';
 import template from './userAvatarForm.hbs';
 import UserAvatar from '../userAvatar/userAvatar';
 
-export default class UserAvatarForm extends Block<any> {
+export default class UserAvatarForm extends Block {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(props: any) {
     super(props);

@@ -9,8 +9,7 @@ interface AvatarProps {
   events?: any;
 }
 
-export default class UserAvatar extends Block<AvatarProps> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
+export default class UserAvatar extends Block {
   constructor(props: AvatarProps) {
     super(props);
 

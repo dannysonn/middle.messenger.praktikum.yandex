@@ -1,16 +1,15 @@
-# Messanger project
-This is my little study project, to learn how framework works inside 
+# 🚀 Welcome to your new awesome project!
 
-Current stack: Parcel, Handlebars, JavaScript, SCSS, Express + Node.js, TypeScript, ESLint, Stylelint, Routing, WebSocket
+This project has been created using **webpack-cli**, you can now run
 
-Figma link [here](https://www.figma.com/file/vhdI8BVGn279kYa3bMS54K/Messanger?node-id=0%3A1)
+```
+npm run build
+```
 
-Deployed project [here](https://soft-torte-46ed76.netlify.app)
+or
 
-----
-✅ Install dependencies: npm install \
-✅ Start the project in dev mode: npm run dev \
-✅ Build the project: npm run build \
-✅ Start the project in prod mode: npm run start \
-✅ To compile SCSS into CSS: npm run sass \
+```
+yarn build
+```
 
+to bundle your application

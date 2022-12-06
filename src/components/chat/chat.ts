@@ -10,12 +10,9 @@ interface ChatProps {
   messagesCount: string;
   deleteChatBtn: Button;
   id: string;
-  events: any;
-  addUserBtn: Button;
-  deleteUserBtn: Button;
 }
 
-export default class Chat extends Block<ChatProps> {
+export default class Chat extends Block {
   constructor(props: ChatProps) {
     super(props);
   }

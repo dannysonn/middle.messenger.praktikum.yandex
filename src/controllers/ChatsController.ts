@@ -1,4 +1,4 @@
-import ChatsApi, {CreateChatData, DeleteChatData} from '../api/ChatsApi';
+import ChatsApi, { CreateChatData, DeleteChatData } from '../api/ChatsApi';
 import { store } from '../utils/Store';
 
 class ChatsController {
@@ -53,7 +53,7 @@ class ChatsController {
     await this.api.connectToChat(chatId)
       .then((data: any) => {
         const chatContent = document.querySelector('.messages__content');
-        chatContent.innerHTML = '';
+        chatContent!.innerHTML = '';
 
         if (this.socket) {
           this.socket.close();
@@ -144,6 +144,7 @@ class ChatsController {
         });
 
         this.socket.addEventListener('error', (event) => {
+          // @ts-ignore
           console.log('Ошибка', event.message);
         });
       });

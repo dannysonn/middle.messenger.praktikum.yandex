@@ -16,7 +16,7 @@ interface ProfileProps {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export class ProfileChangeData extends Block<ProfileProps> {
+export class ProfileChangeData extends Block {
   constructor(props: ProfileProps) {
     super(props);
   }
@@ -95,10 +95,10 @@ export class ProfileChangeData extends Block<ProfileProps> {
           };
 
           inputs.forEach((input: any) => {
-            // @ts-ignore
             userData[input.name] = input.value;
           });
 
+          // @ts-ignore
           await UserController.changeUserData(userData).then(() => {
             alert('Data changed');
           });
@@ -106,6 +106,7 @@ export class ProfileChangeData extends Block<ProfileProps> {
       },
     });
 
+    // @ts-ignore
     this.children.buttons = [
       new Button({
         class: 'profile__footer-item',

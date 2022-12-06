@@ -15,7 +15,7 @@ interface InputProps {
   events?: any;
 }
 
-export default class Input extends Block<InputProps> {
+export default class Input extends Block {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(props: InputProps) {
     super(props);

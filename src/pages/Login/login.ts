@@ -7,7 +7,7 @@ import AuthController from '../../controllers/AuthController';
 import Button from '../../components/button/button';
 import { router } from '../../index';
 import ChatsController from '../../controllers/ChatsController';
-import {initInputsListEvents} from "../../utils/initInputsList";
+import { initInputsListEvents } from '../../utils/initInputsList';
 
 const inputsData = [
   new Input({
@@ -36,7 +36,7 @@ interface LoginProps {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export class Login extends Block<LoginProps> {
+export class Login extends Block {
   constructor(props: LoginProps) {
     super(props);
   }
