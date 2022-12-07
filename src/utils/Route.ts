@@ -1,5 +1,5 @@
-import { render } from "./render";
-import Block from "./Block";
+import { render } from './render';
+import Block from './Block';
 
 export default class Route {
   _pathname: string;
@@ -44,8 +44,6 @@ export default class Route {
       // block.constructor.apply(block, )
 
       // const block = new className();
-
-
     }
 
     render(this._props.rootQuery, this._block);

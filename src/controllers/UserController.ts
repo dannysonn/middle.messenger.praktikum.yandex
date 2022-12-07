@@ -1,5 +1,5 @@
-import UserApi, {UserData, UserPassword} from '../api/UserApi';
-import {store} from "../utils/Store";
+import UserApi, { UserData, UserPassword } from '../api/UserApi';
+import { store } from '../utils/Store';
 
 class UserController {
   api: any;

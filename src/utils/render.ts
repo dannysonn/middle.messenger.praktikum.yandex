@@ -9,8 +9,6 @@ export function render(query: string, block: Block) {
 
   root.innerHTML = '';
   // block.element.removeAttribute('style');
-  let blockk = block.getContent();
-  console.log(blockk)
   root.appendChild(block.getContent());
   block.show();
 
