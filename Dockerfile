@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:18.04
 
 WORKDIR /messanger
 
@@ -9,5 +9,3 @@ RUN apt update && apt install -y nodejs && apt install -y npm && npm install && 
 EXPOSE 3000
 
 CMD ["node", "src/server.js"]
-
-

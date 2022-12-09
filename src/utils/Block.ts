@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+import { v4 as uuidv4 } from 'uuid';
 import EventBus from './EventBus';
 import { isEqual } from './isEqual';
 
@@ -10,7 +10,7 @@ export default class Block {
     FLOW_RENDER: 'flow:render',
   };
 
-  public id: string = nanoid(8);
+  public id: string = uuidv4();
 
   private _element: HTMLElement;
 

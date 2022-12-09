@@ -25,9 +25,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   initInputsListEvents();
 
-  const isChatsPage = document.querySelector('.messages');
-  const isAuthPage = document.querySelector('.authorization');
-
   await AuthController.getUser();
   await ChatsController.getChats();
 
