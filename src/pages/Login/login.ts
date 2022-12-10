@@ -35,8 +35,7 @@ interface LoginProps {
 
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export class Login extends Block {
+export class Login extends Block<Record<string, any>> {
   constructor(props: LoginProps) {
     super(props);
   }
@@ -51,15 +50,19 @@ export class Login extends Block {
 
           const data = validateForm();
 
-          await AuthController.signIn(data).then(() => {
-            AuthController.getUser();
+          try {
+            await AuthController.signIn(data).then(() => {
+              AuthController.getUser();
 
-            localStorage.setItem('currentPassword', `${data.password}`);
+              localStorage.setItem('currentPassword', `${data.password}`);
 
-            ChatsController.getChats();
+              ChatsController.getChats();
 
-            router.go('/chats');
-          });
+              router.go('/chats');
+            });
+          } catch (e) {
+            console.error(e);
+          }
         },
       },
     });

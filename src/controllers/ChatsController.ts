@@ -89,7 +89,13 @@ class ChatsController {
         });
 
         this.socket.addEventListener('message', (event) => {
-          const data = JSON.parse(event.data);
+          let data;
+
+          try {
+            data = JSON.parse(event.data);
+          } catch (e) {
+            console.error(e);
+          }
           console.log('Получены данные', data);
 
           if (data.type === 'pong') {

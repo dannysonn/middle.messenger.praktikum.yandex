@@ -15,7 +15,7 @@ interface ChatsProps {
   events?: any;
 }
 
-export class Chats extends Block {
+export class Chats extends Block<Record<string, any>> {
   children: any;
 
   constructor(props: ChatsProps) {
@@ -73,7 +73,11 @@ export class Chats extends Block {
             title,
           };
 
-          await ChatsController.createChat(data);
+          try {
+            await ChatsController.createChat(data);
+          } catch (e) {
+            console.error(e);
+          }
 
           title = '';
         },
@@ -100,7 +104,11 @@ export class Chats extends Block {
                 const userId = store.getState().user.id;
                 const chatId = chat.id;
 
-                await ChatsController.connectToChat(userId, chatId);
+                try {
+                  await ChatsController.connectToChat(userId, chatId);
+                } catch (e) {
+                  console.error(e);
+                }
               },
             },
             deleteChatBtn: new Button({
@@ -114,7 +122,11 @@ export class Chats extends Block {
                     chatId: id,
                   };
 
-                  await ChatsController.deleteChat(data);
+                  try {
+                    await ChatsController.deleteChat(data);
+                  } catch (e) {
+                    console.error(e);
+                  }
                 },
               },
             }),
@@ -129,7 +141,11 @@ export class Chats extends Block {
                   const chatId = chat.id;
                   const userId = e.currentTarget.previousElementSibling.value;
 
-                  await ChatsController.addUserToChat(userId, chatId);
+                  try {
+                    await ChatsController.addUserToChat(userId, chatId);
+                  } catch (e) {
+                    console.error(e);
+                  }
                 },
               },
             }),
@@ -144,7 +160,11 @@ export class Chats extends Block {
                   const chatId = chat.id;
                   const userId = e.currentTarget.previousElementSibling.value;
 
-                  await ChatsController.deleteUserFromChat(userId, chatId);
+                  try {
+                    await ChatsController.deleteUserFromChat(userId, chatId);
+                  } catch (e) {
+                    console.error(e);
+                  }
                 },
               },
             }),

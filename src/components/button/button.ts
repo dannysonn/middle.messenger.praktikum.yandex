@@ -9,7 +9,7 @@ interface ButtonProps {
   type?: any,
 }
 
-export default class Button extends Block {
+export default class Button extends Block<Record<string, any>> {
   constructor(props: ButtonProps) {
     super(props);
   }

@@ -15,7 +15,7 @@ interface ChatProps {
   id: string;
 }
 
-export default class Chat extends Block {
+export default class Chat extends Block<Record<string, any>> {
   constructor(props: ChatProps) {
     super(props);
   }

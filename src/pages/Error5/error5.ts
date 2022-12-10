@@ -5,7 +5,7 @@ interface ErrorProps {
   errorCode: string;
 }
 
-export default class Error5 extends Block {
+export default class Error5 extends Block<Record<string, any>> {
   constructor(props: ErrorProps) {
     super(props);
   }

@@ -6,7 +6,7 @@ interface UserAvatarFormProps {
   events: any;
 }
 
-export default class UserAvatarForm extends Block {
+export default class UserAvatarForm extends Block<Record<string, any>> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(props: UserAvatarFormProps) {
     super(props);

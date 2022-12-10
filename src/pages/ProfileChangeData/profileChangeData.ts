@@ -16,7 +16,7 @@ interface ProfileProps {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export class ProfileChangeData extends Block {
+export class ProfileChangeData extends Block<Record<string, any>> {
   constructor(props: ProfileProps) {
     super(props);
   }
@@ -98,10 +98,14 @@ export class ProfileChangeData extends Block {
             userData[input.name] = input.value;
           });
 
-          // @ts-ignore
-          await UserController.changeUserData(userData).then(() => {
-            alert('Data changed');
-          });
+          try {
+            // @ts-ignore
+            await UserController.changeUserData(userData).then(() => {
+              alert('Data changed');
+            });
+          } catch (e) {
+            console.error(e);
+          }
         },
       },
     });

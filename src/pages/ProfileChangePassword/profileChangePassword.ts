@@ -18,7 +18,7 @@ interface PasswordData {
   newPassword: string,
 }
 
-export class ProfileChangePassword extends Block {
+export class ProfileChangePassword extends Block<Record<string, any>> {
   constructor(props: ProfileProps) {
     super(props);
   }
@@ -70,8 +70,12 @@ export class ProfileChangePassword extends Block {
           if (oldPassword !== localStorage.getItem('currentPassword')) {
             alert('Wrong current password');
           } else {
-            await UserController.changeUserPassword(passwordData);
-            localStorage.setItem('currentPassword', `${newPassword}`);
+            try {
+              await UserController.changeUserPassword(passwordData);
+              localStorage.setItem('currentPassword', `${newPassword}`);
+            } catch (e) {
+              console.error(e);
+            }
           }
         },
       },

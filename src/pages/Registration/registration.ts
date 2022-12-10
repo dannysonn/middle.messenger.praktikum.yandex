@@ -72,7 +72,7 @@ interface RegistrationProps {
   signInBtn: Button
 }
 
-export class Registration extends Block {
+export class Registration extends Block<Record<string, any>> {
   constructor(props: RegistrationProps) {
     super(props);
   }
@@ -86,15 +86,19 @@ export class Registration extends Block {
           e.preventDefault();
 
           const data = validateForm();
-          await AuthController.signUp(data).then(() => {
-            AuthController.getUser();
+          try {
+            await AuthController.signUp(data).then(() => {
+              AuthController.getUser();
 
-            localStorage.setItem('currentPassword', `${data.password}`);
+              localStorage.setItem('currentPassword', `${data.password}`);
 
-            ChatsController.getChats();
+              ChatsController.getChats();
 
-            router.go('/chats');
-          });
+              router.go('/chats');
+            });
+          } catch (e) {
+            console.error(e);
+          }
         },
       },
     });

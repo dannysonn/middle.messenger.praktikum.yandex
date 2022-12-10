@@ -18,7 +18,7 @@ interface ProfileProps {
   profileBtn: Button,
 }
 
-export class Profile extends Block {
+export class Profile extends Block<Record<string, any>> {
   constructor(props: ProfileProps) {
     super(props);
 
@@ -41,7 +41,11 @@ export class Profile extends Block {
           // @ts-ignore
           formData.append('avatar', inputFile?.files[0]);
 
-          await UserController.changeUserAvatar(formData);
+          try {
+            await UserController.changeUserAvatar(formData);
+          } catch (e) {
+            console.error(e);
+          }
         },
       },
     });
@@ -59,6 +63,7 @@ export class Profile extends Block {
           placeholder: this.props?.email,
           name: 'email',
           hasLineBreak: false,
+          readonly: true,
         }),
         new Input({
           wrapperClass: 'profile__item',
@@ -70,6 +75,7 @@ export class Profile extends Block {
           placeholder: this.props?.login,
           name: 'login',
           hasLineBreak: false,
+          readonly: true,
         }),
         new Input({
           wrapperClass: 'profile__item',
@@ -81,6 +87,7 @@ export class Profile extends Block {
           placeholder: this.props?.first_name,
           name: 'first_name',
           hasLineBreak: false,
+          readonly: true,
         }),
         new Input({
           wrapperClass: 'profile__item',
@@ -92,6 +99,7 @@ export class Profile extends Block {
           placeholder: this.props?.second_name,
           name: 'second_name',
           hasLineBreak: false,
+          readonly: true,
         }),
         new Input({
           wrapperClass: 'profile__item',
@@ -103,6 +111,7 @@ export class Profile extends Block {
           placeholder: this.props?.phone,
           name: 'phone',
           hasLineBreak: false,
+          readonly: true,
         }),
       ],
     });
@@ -154,7 +163,11 @@ export class Profile extends Block {
         click: async () => {
           const router = new Router('#root');
           router.go('/chats');
-          await ChatsController.getChats();
+          try {
+            await ChatsController.getChats();
+          } catch (e) {
+            console.error(e);
+          }
         },
       },
     });

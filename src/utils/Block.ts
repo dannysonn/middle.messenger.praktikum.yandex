@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import EventBus from './EventBus';
 import { isEqual } from './isEqual';
 
-export default class Block {
+export default abstract class Block<Props extends Record<string, any>> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -18,7 +18,7 @@ export default class Block {
 
   protected props: any;
 
-  protected children: Record<string, Block>;
+  protected children: Record<string, Block<any>>;
 
   private eventBus: () => EventBus;
 

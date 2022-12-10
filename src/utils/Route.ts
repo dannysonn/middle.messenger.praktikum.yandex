@@ -6,7 +6,7 @@ export default class Route {
 
   _blockClass: any;
 
-  _block: Block;
+  _block: Block<Record<string, any>>;
 
   _props: any;
 
@@ -36,14 +36,6 @@ export default class Route {
   render() {
     if (!this._block) {
       this._block = new this._blockClass();
-
-      // const className = Chat;
-      // this._block = new this._blockClass();
-
-      // const block = Object.create(window[className].prototype);
-      // block.constructor.apply(block, )
-
-      // const block = new className();
     }
 
     render(this._props.rootQuery, this._block);

@@ -15,7 +15,7 @@ global.document = dom.window.document;
 if (dom.window.document.defaultView) {
   global.DocumentFragment = dom.window.document.defaultView.DocumentFragment;
 }
-class Component extends Block {
+class Component extends Block<Record<string, any>> {
   constructor(props: any) {
     super(props);
   }

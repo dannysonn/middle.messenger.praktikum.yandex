@@ -30,7 +30,7 @@ export const withStore = (
   mapStateToProps: (state: Record<string, unknown>) => Record<string, unknown>,
 ) => (Component: typeof Block) => {
   let state: Record<string, unknown>;
-  return class extends Component {
+  return class extends Component<Record<string, any>> {
     constructor(props: any) {
       state = mapStateToProps(store.getState());
       super({ ...props, ...state });
