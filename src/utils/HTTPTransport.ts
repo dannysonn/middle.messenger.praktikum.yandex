@@ -1,5 +1,5 @@
 import { queryStringify } from './queryStringify';
-import { router } from '../index';
+import Router from './Router';
 
 enum Methods {
   GET = 'GET',
@@ -42,6 +42,7 @@ export default class HTTPTransport {
         alert(xhr.response.reason);
 
         if (xhr.response.reason === 'User already in system') {
+          const router = new Router('#root');
           router.go('/chats');
         }
         reject(xhr.response);

@@ -69,8 +69,8 @@
     "stylelint-config-standard": "29.0.0",
     "stylelint-scss": "4.3.0",
     "ts-mocha": "10.0.0",
-    "uuid": "^9.0.0",
-    "xhr2": "^0.2.1"
+    "uuid": "9.0.0",
+    "xhr2": "0.2.1"
   },
   "husky": {
     "hooks": {

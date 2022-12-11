@@ -2,7 +2,8 @@ import { v4 as uuidv4 } from 'uuid';
 import EventBus from './EventBus';
 import { isEqual } from './isEqual';
 
-export default abstract class Block<Props extends Record<string, any>> {
+export default // @ts-ignore
+abstract class Block<Props extends Record<string, any> = unknown> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -14,9 +15,9 @@ export default abstract class Block<Props extends Record<string, any>> {
 
   private _element: HTMLElement;
 
-  private _meta: { props: any };
+  private _meta: { props: Props };
 
-  protected props: any;
+  protected props: Props;
 
   protected children: Record<string, Block<any>>;
 
@@ -34,6 +35,7 @@ export default abstract class Block<Props extends Record<string, any>> {
       props,
     };
 
+    // @ts-ignore
     this.props = this._makePropsProxy(props);
 
     this.eventBus = () => eventBus;
@@ -44,7 +46,8 @@ export default abstract class Block<Props extends Record<string, any>> {
 
   private getPropsAndChildren(propsAndChildren: any) {
     const children: any = {};
-    const props: any = {};
+    // @ts-ignore
+    const props: Props = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
@@ -52,6 +55,7 @@ export default abstract class Block<Props extends Record<string, any>> {
       } else if (Array.isArray(value) && value.every((v) => v instanceof Block)) {
         children[key] = value;
       } else {
+        // @ts-ignore
         props[key] = value;
       }
     });
@@ -80,20 +84,20 @@ export default abstract class Block<Props extends Record<string, any>> {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  private _componentDidUpdate(oldProps: any, newProps: any): void {
+  private _componentDidUpdate(oldProps: Props, newProps: Props): void {
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
-  protected componentDidUpdate(oldProps: any, newProps: any):boolean {
+  protected componentDidUpdate(oldProps: Props, newProps: Props):boolean {
     if (!isEqual(oldProps, newProps)) {
       return true;
     }
     return false;
   }
 
-  public setProps = (nextProps: any):undefined => {
+  public setProps = (nextProps: Props):undefined => {
     if (!nextProps) {
       return;
     }
@@ -132,7 +136,7 @@ export default abstract class Block<Props extends Record<string, any>> {
     return this.element;
   }
 
-  private _makePropsProxy(props: any) {
+  private _makePropsProxy(props: Props) {
     const self = this;
 
     return new Proxy(props as unknown as object, {
