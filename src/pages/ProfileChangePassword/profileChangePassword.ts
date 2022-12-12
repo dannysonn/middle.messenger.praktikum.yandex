@@ -18,7 +18,7 @@ interface PasswordData {
   newPassword: string,
 }
 
-export class ProfileChangePassword extends Block<ProfileProps> {
+export class ProfileChangePassword extends Block<Record<string, any>> {
   constructor(props: ProfileProps) {
     super(props);
   }
@@ -70,13 +70,18 @@ export class ProfileChangePassword extends Block<ProfileProps> {
           if (oldPassword !== localStorage.getItem('currentPassword')) {
             alert('Wrong current password');
           } else {
-            await UserController.changeUserPassword(passwordData);
-            localStorage.setItem('currentPassword', `${newPassword}`);
+            try {
+              await UserController.changeUserPassword(passwordData);
+              localStorage.setItem('currentPassword', `${newPassword}`);
+            } catch (e) {
+              console.error(e);
+            }
           }
         },
       },
     });
 
+    // @ts-ignore
     this.children.buttons = [
       new Button({
         class: 'profile__footer-item',
@@ -97,7 +102,7 @@ export class ProfileChangePassword extends Block<ProfileProps> {
       class: 'profile__btn',
       events: {
         click: () => {
-          const router = new Router();
+          const router = new Router('#root');
           router.go('/chats');
         },
       },

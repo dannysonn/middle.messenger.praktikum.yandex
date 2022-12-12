@@ -8,16 +8,17 @@ import Input from '../../components/input/input';
 import Router from '../../utils/Router';
 import UserController from '../../controllers/UserController';
 import UserAvatarForm from '../../components/userAvatarForm/userAvatarForm';
-import {store, StoreEvents} from "../../utils/Store";
-import ChatsController from "../../controllers/ChatsController";
+import { store, StoreEvents } from '../../utils/Store';
+import ChatsController from '../../controllers/ChatsController';
 
 interface ProfileProps {
   buttons: Button[],
   form: Form,
+  userAvatarForm: UserAvatarForm,
   profileBtn: Button,
 }
 
-export class Profile extends Block<ProfileProps> {
+export class Profile extends Block<Record<string, any>> {
   constructor(props: ProfileProps) {
     super(props);
 
@@ -27,6 +28,28 @@ export class Profile extends Block<ProfileProps> {
   }
 
   protected initChildren() {
+    this.children.userAvatarForm = new UserAvatarForm({
+      avatar: `https://ya-praktikum.tech/api/v2/resources${this.props?.avatar}`,
+      events: {
+        submit: async (e) => {
+          e.preventDefault();
+
+          const inputFile = document.getElementById('avatar');
+
+          const formData = new FormData();
+
+          // @ts-ignore
+          formData.append('avatar', inputFile?.files[0]);
+
+          try {
+            await UserController.changeUserAvatar(formData);
+          } catch (e) {
+            console.error(e);
+          }
+        },
+      },
+    });
+
     this.children.form = new Form({
       formId: 'profileForm',
       inputs: [
@@ -40,6 +63,7 @@ export class Profile extends Block<ProfileProps> {
           placeholder: this.props?.email,
           name: 'email',
           hasLineBreak: false,
+          readonly: true,
         }),
         new Input({
           wrapperClass: 'profile__item',
@@ -51,6 +75,7 @@ export class Profile extends Block<ProfileProps> {
           placeholder: this.props?.login,
           name: 'login',
           hasLineBreak: false,
+          readonly: true,
         }),
         new Input({
           wrapperClass: 'profile__item',
@@ -62,6 +87,7 @@ export class Profile extends Block<ProfileProps> {
           placeholder: this.props?.first_name,
           name: 'first_name',
           hasLineBreak: false,
+          readonly: true,
         }),
         new Input({
           wrapperClass: 'profile__item',
@@ -73,6 +99,7 @@ export class Profile extends Block<ProfileProps> {
           placeholder: this.props?.second_name,
           name: 'second_name',
           hasLineBreak: false,
+          readonly: true,
         }),
         new Input({
           wrapperClass: 'profile__item',
@@ -84,10 +111,12 @@ export class Profile extends Block<ProfileProps> {
           placeholder: this.props?.phone,
           name: 'phone',
           hasLineBreak: false,
+          readonly: true,
         }),
       ],
     });
 
+    // @ts-ignore
     this.children.buttons = [
       new Button({
         class: 'profile__footer-item',
@@ -106,7 +135,7 @@ export class Profile extends Block<ProfileProps> {
         text: 'Change password',
         events: {
           click: () => {
-            const router = new Router();
+            const router = new Router('#root');
             router.go('/profileChangePassword');
 
             initInputsListEvents();
@@ -120,7 +149,7 @@ export class Profile extends Block<ProfileProps> {
           click: () => {
             AuthController.logout();
 
-            const router = new Router();
+            const router = new Router('#root');
             router.go('/');
           },
         },
@@ -134,24 +163,11 @@ export class Profile extends Block<ProfileProps> {
         click: async () => {
           const router = new Router('#root');
           router.go('/chats');
-          await ChatsController.getChats();
-        },
-      },
-    });
-
-    this.children.userAvatar = new UserAvatarForm({
-      avatar: this.props?.avatar,
-      events: {
-        submit: async (e) => {
-          e.preventDefault();
-
-          const inputFile = document.getElementById('avatar');
-
-          const formData = new FormData();
-
-          formData.append('avatar', inputFile?.files[0]);
-
-          await UserController.changeUserAvatar(formData);
+          try {
+            await ChatsController.getChats();
+          } catch (e) {
+            console.error(e);
+          }
         },
       },
     });

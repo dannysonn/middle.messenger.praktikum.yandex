@@ -1,7 +1,6 @@
 <div>
     <aside class="chats-sidebar">
         <nav class="chats-header">
-<!--            <a href="/profile" class="chats-header__profile-link">Profile link</a>-->
             {{{profileBtn}}}
 
             <form class="chats-header__search">
@@ -10,42 +9,23 @@
             </form>
         </nav>
         <ul class="chats-list">
-            {{{chats}}}
+            {{{chatList}}}
         </ul>
 
     </aside>
     <main class="messages">
-        <!-- Messages header -->
-<!--        <nav class="messages__header">-->
 
-<!--            <div class="user">-->
-<!--                <img class="user__avatar" src="https://via.placeholder.com/150" alt="user avatar">-->
-<!--                <span class="user__name">John</span>-->
-<!--            </div>-->
-
-<!--            <div class="messages__settings"></div>-->
-
-<!--        </nav>-->
-
-        <!-- Messages content -->
         <div class="messages__main">
             <div class="messages__block">
 
                 <div class="messages__content">
-                    
+
                 </div>
             </div>
 
         </div>
 
-        <!-- Messages send -->
         <footer class="messages__footer">
-<!--            <div class="messages__file">-->
-<!--                <form action="" method="post">-->
-<!--                    <label for="addFile"><img src="../../../static/images/icons/add-file-icn.svg" alt="add file"></label>-->
-<!--                    <input id="addFile" type="file">-->
-<!--                </form>-->
-<!--            </div>-->
             <form action="">
                 <input type="message" id="messages__text" placeholder="Message" name="message"/>
                 {{{button}}}

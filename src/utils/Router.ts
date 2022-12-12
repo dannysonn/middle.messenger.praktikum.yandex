@@ -1,18 +1,17 @@
-import Route from "./Route";
-
+import Route from './Route';
 
 export default class Router {
   private static __instance: Router;
+
   private _currentRoute: Route;
+
   private _rootQuery: string;
 
   routes: Route[];
 
   history: History;
 
-
   constructor(rootQuery: string) {
-
     if (Router.__instance) {
       return Router.__instance;
     }
@@ -67,7 +66,7 @@ export default class Router {
   }
 
   getRoute(pathname: string) {
-    return this.routes.find(route => route.match(pathname));
+    return this.routes.find((route) => route.match(pathname));
   }
 
   getCurrentRoute() {

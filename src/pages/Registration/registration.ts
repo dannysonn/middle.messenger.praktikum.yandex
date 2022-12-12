@@ -7,7 +7,7 @@ import { validateForm } from '../../utils/validateForm';
 import AuthController from '../../controllers/AuthController';
 import { router } from '../../index';
 import ChatsController from '../../controllers/ChatsController';
-import {initInputsListEvents} from "../../utils/initInputsList";
+import { initInputsListEvents } from '../../utils/initInputsList';
 
 const inputs = [
   new Input({
@@ -72,7 +72,7 @@ interface RegistrationProps {
   signInBtn: Button
 }
 
-export class Registration extends Block<RegistrationProps> {
+export class Registration extends Block<Record<string, any>> {
   constructor(props: RegistrationProps) {
     super(props);
   }
@@ -86,15 +86,19 @@ export class Registration extends Block<RegistrationProps> {
           e.preventDefault();
 
           const data = validateForm();
-          await AuthController.signUp(data).then(() => {
-            AuthController.getUser();
+          try {
+            await AuthController.signUp(data).then(() => {
+              AuthController.getUser();
 
-            localStorage.setItem('currentPassword', `${data.password}`);
+              localStorage.setItem('currentPassword', `${data.password}`);
 
-            ChatsController.getChats();
+              ChatsController.getChats();
 
-            router.go('/chats');
-          });
+              router.go('/chats');
+            });
+          } catch (e) {
+            console.error(e);
+          }
         },
       },
     });

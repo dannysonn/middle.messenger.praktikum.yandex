@@ -6,7 +6,7 @@ import { validateForm } from '../../utils/validateForm';
 import Router from '../../utils/Router';
 import ChatsController from '../../controllers/ChatsController';
 import { store, StoreEvents } from '../../utils/Store';
-import {initInputsListEvents} from "../../utils/initInputsList";
+import { initInputsListEvents } from '../../utils/initInputsList';
 
 interface ChatsProps {
   button: Button;
@@ -15,8 +15,9 @@ interface ChatsProps {
   events?: any;
 }
 
-export class Chats extends Block<ChatsProps> {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
+export class Chats extends Block<Record<string, any>> {
+  children: any;
+
   constructor(props: ChatsProps) {
     super(props);
 
@@ -51,7 +52,7 @@ export class Chats extends Block<ChatsProps> {
       class: 'chats-header__profile-link',
       events: {
         click: () => {
-          const router = new Router();
+          const router = new Router('#root');
 
           router.go('/profile');
         },
@@ -66,23 +67,27 @@ export class Chats extends Block<ChatsProps> {
         click: async (e: Event) => {
           e.preventDefault();
 
+          // @ts-ignore
           let title = document.getElementById('new-chat')?.value;
           const data = {
             title,
           };
 
-          await ChatsController.createChat(data);
+          try {
+            await ChatsController.createChat(data);
+          } catch (e) {
+            console.error(e);
+          }
 
           title = '';
         },
       },
     });
 
-    this.children.chats = [];
-
+    this.children.chatList = [];
     if (this.props?.chats) {
       Object.entries(this.props.chats).map(([key, chat]: [string, any]) => {
-        this.children.chats.push(
+        this.children.chatList.push(
           new Chat({
             userAvatar: chat.avatar ? chat.avatar : 'https://via.placeholder.com/150',
             userName: chat.title,
@@ -92,13 +97,18 @@ export class Chats extends Block<ChatsProps> {
             id: chat.id,
             events: {
               click: async () => {
-                document.querySelector('.messages__footer').style = 'display: flex;';
+                // @ts-ignore
+                document.querySelector('.messages__footer')!.style = 'display: flex;';
                 initInputsListEvents();
 
                 const userId = store.getState().user.id;
                 const chatId = chat.id;
 
-                await ChatsController.connectToChat(userId, chatId);
+                try {
+                  await ChatsController.connectToChat(userId, chatId);
+                } catch (e) {
+                  console.error(e);
+                }
               },
             },
             deleteChatBtn: new Button({
@@ -112,7 +122,11 @@ export class Chats extends Block<ChatsProps> {
                     chatId: id,
                   };
 
-                  await ChatsController.deleteChat(data);
+                  try {
+                    await ChatsController.deleteChat(data);
+                  } catch (e) {
+                    console.error(e);
+                  }
                 },
               },
             }),
@@ -127,7 +141,11 @@ export class Chats extends Block<ChatsProps> {
                   const chatId = chat.id;
                   const userId = e.currentTarget.previousElementSibling.value;
 
-                  await ChatsController.addUserToChat(userId, chatId);
+                  try {
+                    await ChatsController.addUserToChat(userId, chatId);
+                  } catch (e) {
+                    console.error(e);
+                  }
                 },
               },
             }),
@@ -142,7 +160,11 @@ export class Chats extends Block<ChatsProps> {
                   const chatId = chat.id;
                   const userId = e.currentTarget.previousElementSibling.value;
 
-                  await ChatsController.deleteUserFromChat(userId, chatId);
+                  try {
+                    await ChatsController.deleteUserFromChat(userId, chatId);
+                  } catch (e) {
+                    console.error(e);
+                  }
                 },
               },
             }),

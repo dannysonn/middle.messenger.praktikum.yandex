@@ -7,15 +7,15 @@ interface ChatProps {
   userName: string;
   message: string;
   time: string;
-  messagesCount: string;
-  deleteChatBtn: Button;
-  id: string;
   events: any;
+  messagesCount: string;
   addUserBtn: Button;
   deleteUserBtn: Button;
+  deleteChatBtn: Button;
+  id: string;
 }
 
-export default class Chat extends Block<ChatProps> {
+export default class Chat extends Block<Record<string, any>> {
   constructor(props: ChatProps) {
     super(props);
   }

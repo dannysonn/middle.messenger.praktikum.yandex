@@ -8,14 +8,15 @@ interface InputProps {
   id?: string;
   label: string;
   type: string;
-  placeholder: string;
+  placeholder?: string;
   name: string;
   hasLineBreak: boolean;
   readonly?: boolean;
   events?: any;
+  value?: any;
 }
 
-export default class Input extends Block<InputProps> {
+export default class Input extends Block<Record<string, any>> {
   // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(props: InputProps) {
     super(props);

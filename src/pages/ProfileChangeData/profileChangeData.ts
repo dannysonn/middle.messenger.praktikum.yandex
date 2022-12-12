@@ -16,7 +16,7 @@ interface ProfileProps {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export class ProfileChangeData extends Block<ProfileProps> {
+export class ProfileChangeData extends Block<Record<string, any>> {
   constructor(props: ProfileProps) {
     super(props);
   }
@@ -32,7 +32,7 @@ export class ProfileChangeData extends Block<ProfileProps> {
           id: 'authForm__email',
           label: 'Email',
           type: 'email',
-          placeholder: this.props?.email,
+          value: this.props?.email,
           name: 'email',
           hasLineBreak: false,
         }),
@@ -43,7 +43,7 @@ export class ProfileChangeData extends Block<ProfileProps> {
           id: 'authForm__login',
           label: 'Login',
           type: 'login',
-          placeholder: this.props?.login,
+          value: this.props?.login,
           name: 'login',
           hasLineBreak: false,
         }),
@@ -54,7 +54,7 @@ export class ProfileChangeData extends Block<ProfileProps> {
           id: 'authForm__name',
           label: 'Name',
           type: 'name',
-          placeholder: this.props?.first_name,
+          value: this.props?.first_name,
           name: 'first_name',
           hasLineBreak: false,
         }),
@@ -65,7 +65,7 @@ export class ProfileChangeData extends Block<ProfileProps> {
           id: 'authForm__surname',
           label: 'Surname',
           type: 'surname',
-          placeholder: this.props?.second_name,
+          value: this.props?.second_name,
           name: 'second_name',
           hasLineBreak: false,
         }),
@@ -76,7 +76,7 @@ export class ProfileChangeData extends Block<ProfileProps> {
           id: 'authForm__phone',
           label: 'Phone',
           type: 'phone',
-          placeholder: this.props?.phone,
+          value: this.props?.phone,
           name: 'phone',
           hasLineBreak: false,
         }),
@@ -95,17 +95,22 @@ export class ProfileChangeData extends Block<ProfileProps> {
           };
 
           inputs.forEach((input: any) => {
-            // @ts-ignore
             userData[input.name] = input.value;
           });
 
-          await UserController.changeUserData(userData).then(() => {
-            alert('Data changed');
-          });
+          try {
+            // @ts-ignore
+            await UserController.changeUserData(userData).then(() => {
+              alert('Data changed');
+            });
+          } catch (e) {
+            console.error(e);
+          }
         },
       },
     });
 
+    // @ts-ignore
     this.children.buttons = [
       new Button({
         class: 'profile__footer-item',

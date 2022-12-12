@@ -1,4 +1,4 @@
-import ChatsApi, {CreateChatData, DeleteChatData} from '../api/ChatsApi';
+import ChatsApi, { CreateChatData, DeleteChatData } from '../api/ChatsApi';
 import { store } from '../utils/Store';
 
 class ChatsController {
@@ -53,7 +53,7 @@ class ChatsController {
     await this.api.connectToChat(chatId)
       .then((data: any) => {
         const chatContent = document.querySelector('.messages__content');
-        chatContent.innerHTML = '';
+        chatContent!.innerHTML = '';
 
         if (this.socket) {
           this.socket.close();
@@ -89,7 +89,13 @@ class ChatsController {
         });
 
         this.socket.addEventListener('message', (event) => {
-          const data = JSON.parse(event.data);
+          let data;
+
+          try {
+            data = JSON.parse(event.data);
+          } catch (e) {
+            console.error(e);
+          }
           console.log('Получены данные', data);
 
           if (data.type === 'pong') {
@@ -144,6 +150,7 @@ class ChatsController {
         });
 
         this.socket.addEventListener('error', (event) => {
+          // @ts-ignore
           console.log('Ошибка', event.message);
         });
       });

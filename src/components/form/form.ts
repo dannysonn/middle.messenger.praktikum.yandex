@@ -8,7 +8,7 @@ interface FormProps {
   events?: any;
 }
 
-export default class Form extends Block<FormProps> {
+export default class Form extends Block<Record<string, any>> {
   constructor(props: FormProps) {
     super(props);
   }
